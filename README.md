@@ -4,8 +4,8 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
   * [Stuff that is needed](#stuff-that-is-needed)
-  * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.and-fastd)
-  * [Networking](#networking)
+  * [B.A.T.M.A.N. and fastd](#B.A.T.M.A.N. and fastd)
+  *  [The following section is only needed, if you need the repo.universe-factory.net repository](#the-following-section-is-only needed,-if-you-need-the-repo.universe-factory.net-repository)
   * [DHCPv6 and DNS](#dhcpv6-and-dns)
   * [npm run eject](#npm-run-eject)
 * [Writing and Running Tests](#writing-and-running-tests)
@@ -47,7 +47,7 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
 
-#### `npm run eject`
+## The following section is only needed, if you need the repo.universe-factory.net repository`
 
 This will start the process of "ejecting" from Create React Native App's build scripts. You'll be asked a couple of questions about how you'd like to build your project.
 
