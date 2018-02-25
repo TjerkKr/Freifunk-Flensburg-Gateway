@@ -3,7 +3,6 @@
 
 * [Requirements](#requirements)
 * [Installation](#installation)
-  * [Install a minimal Debian](#install-a-minimal-debian)
     * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
     * [add repo.universe-factory.net repository](#add-repo.universe-factory.net-repository)
     * [downgrade to batman 14](#downgrade-to-batman-14)
@@ -41,9 +40,6 @@
  2. Stuff that is needed
  
         apt-get install screen htop iftop traceroute mtr-tiny mc speedtest-cli openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https postfix bind9 sudo git apt-transport-https
-
-    
-## Install a minimal Debian
 
 ## B.A.T.M.A.N. and fastd
 
