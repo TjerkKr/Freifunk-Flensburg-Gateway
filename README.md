@@ -12,7 +12,7 @@
 * [DHCP and DNS](#dhcp-and-dns)
   * [DHCP radvd IPv6](#dhcp-radvd-ipv6)
   * [DHCP isc-dhcp-server IPv4 and IPv6](#dhcp-isc-dhcp-server-ipv4-and-ipv6)
-  * [DNS](#dns)
+  * [DNS bind9](#dns-bind9)
 * [VPN](#vpn)
 
 ## Requirements
