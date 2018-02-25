@@ -16,6 +16,13 @@
 * [VPN](#vpn)
 
 ## Requirements
+    min. 2 cores with good thread performance
+    min. 512 MB RAM
+    min. 10 GB HDD
+    approx. 5 TB/Month traffic allowance is a good start.
+    you have to be able to modify the kernel on your server, so OpenVZ or the likes won't work
+    min. 100 Mbit/s connectivity is recommended
+    recommended is also a VPN provider for tunneling the traffic out
 
 ## Installation
 
