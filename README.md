@@ -75,6 +75,7 @@ create the directory for your fastd peers:
      
      mkdir -p /etc/fastd/vpn/peers
      
+## Generate key
 create the keys for fastd:
 
     fastd --generate-key > /root/fastd-keys.pub.sec
