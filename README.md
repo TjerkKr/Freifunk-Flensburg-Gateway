@@ -477,6 +477,6 @@ Speedtest to tun0 and public VPN
       #Source: https://github.com/Wlanfr3ak/auto-speedtest
 
 
-    chmod +x /root/bin/speedtest.sh
+   chmod +x /root/bin/speedtest.sh
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
