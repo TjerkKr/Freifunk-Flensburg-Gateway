@@ -99,7 +99,7 @@ insert your private secret key from the /root/fastd-keys.pub.sec in the secret.c
     
 For the gateway to be able to connect to the other gateways and nodes known in the network, you need to get a bunch of files with the public keys for these. For Freifunk Nord for example, this looks like this: 
 
-    git clone https://github.com/Freifunk-Nord/nord-gw-peers /etc/fastd/vpn/peers
+    git clone git clone https://github.com/freifunk-flensburg/fffl-fastd-peers /etc/fastd/vpn/peers /etc/fastd/vpn/peers
     
 reload fastd without quitting: 
   
@@ -467,7 +467,5 @@ Speedtest to tun0 and public VPN
       #Source: https://github.com/Wlanfr3ak/auto-speedtest
 
 
-
-
    
-from: https://www.freemesh.ie
+from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
