@@ -1,7 +1,7 @@
 
 Installation of a Gateway for Freifunk Flensburg
 
-* [Nat note](#note)
+* [Nat note](#nat-note)
 * [Requirements](#requirements)
 * [Installation](#installation)
     * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
