@@ -235,6 +235,42 @@ give the new IP4 and IPv6 to the bridge:
 
 ## DHCP and DNS
 
+DHCP radvd IPv6
+
+The file /etc/radvd.conf has to be edited.
+
+    interface br-fffl {
+      AdvSendAdvert on;
+      #
+      # Please uncomment if you don't want an IPv6 default route to be broadcasted.
+      #
+      # AdvDefaultLifetime 0;
+      IgnoreIfMissing on;
+      AdvManagedFlag off;
+      AdvOtherConfigFlag on;
+      MaxRtrAdvInterval 200;
+
+      prefix fddf:bf7:10:1:1::/64 {
+     AdvOnLink on;
+     AdvAutonomous on;
+     AdvRouterAddr on;
+     AdvPreferredLifetime 14400;
+     AdvValidLifetime 86400;
+      };
+
+      RDNSS fddf:bf7:10:1:1::[GWnumber] {
+      };
+
+      route fc00::/7
+      {
+     AdvRouteLifetime 1200;
+      };
+    };
+    
+   You can restart it now. 
+
+       service radvd restart
+
 ## DHCP radvd IPv6
 
 ## DHCP isc-dhcp-server IPv4 and IPv6
