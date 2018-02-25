@@ -92,8 +92,139 @@ nano /etc/fastd/vpn/fastd.conf
       /bin/ip link set dev tap0 address 00:00:ff:f1:01:[GWnumber]
       /bin/ip link set dev tap0 up
     ";
+    
+insert your private secret key from the /root/fastd-keys.pub.sec in the secret.conf:
+
+    secret "$your_private_secret_key_from_the_/root/fastd-keys.pub.sec";
+    
+For the gateway to be able to connect to the other gateways and nodes known in the network, you need to get a bunch of files with the public keys for these. For Freifunk Nord for example, this looks like this: 
+
+    git clone https://github.com/Freifunk-Nord/nord-gw-peers /etc/fastd/vpn/peers
+    
+reload fastd without quitting: 
+  
+    killall -HUP fastd
+    
+if it says "no process found", its because you just installed it and it doesn't run, so just start it: 
+  
+    service fastd start
+    
+Regularly update the peers via cron.
+
+    #!/bin/sh
+
+    # hop into correct directory to avoid cron pwd sucks
+    cd $(dirname $0)
+
+    # function to get the current sha-1
+    getCurrentVersion() {
+    git log --format=format:%H -1
+    }
+
+    # get sha-1 before pull
+    revision_current=$(getCurrentVersion)
+
+    git pull -q
+
+    # get sha-1 after pull
+    revision_new=$(getCurrentVersion)
+
+    # if sha-1 changed, make fastd reload the keys
+    if [ "$revision_current" != "$revision_new" ]
+    then
+    kill -HUP $(pidof fastd)
+    fi
+
+make the script executable
+
+    chmod +x /etc/fastd/reloadPeers.sh
+    
+and add these lines in cron with
+
+    sudo crontab -e
+    
+    # Regularly update the fastd peers
+    */5 * * * * /etc/fastd/reloadPeers.sh
+
 
 ## Networking
+
+    Edit the file /etc/sysctl.conf and find the section
+
+    # Uncomment the next line to enable packet forwarding for IPv4
+    net.ipv4.ip_forward=1
+
+    # Uncomment the next line to enable packet forwarding for IPv6
+    #  Enabling this option disables Stateless Address Autoconfiguration
+    #  based on Router Advertisements for this host
+    net.ipv6.conf.all.forwarding=1
+
+The two forwarding rules will be commented out, so you need to remove the # in front of them
+
+Edit the file /etc/network/interfaces:
+
+- After the line "FREEMESH" is the config for your Freifunk Community. Add the parts from here and edit it with your settings. 
+
+      # This file describes the network interfaces available on your system
+      # and how to activate them. For more information, see interfaces(5).
+
+      source /etc/network/interfaces.d/*
+
+      # The loopback network interface
+      auto lo
+      iface lo inet loopback
+
+      # The primary network interface
+      auto eth0
+      allow-hotplug eth0
+
+      iface eth0 inet dhcp
+
+      # Batman
+          auto br-fffl
+          allow-hotplug bat0
+
+      iface eth0 inet6 static
+          address [your public ipv6]  # don't change
+          netmask [your public ipv6 netmask]  # don't change
+          gateway [your public ipv6 gateway]  # don't change
+
+      #  HOSTER: Everything above this line is the config from your hoster
+      # <----------------------------------------------------------------------
+      #  FREEMESH: Everything after this line is the config for your community
+
+      # Batman
+          up /sbin/brctl addbr br-fffl
+
+      iface br-fffl inet static
+          address 10.129.1.XX
+          netmask 255.255.0.0
+          bridge-ports none
+
+      iface br-fffl inet6 static
+          address fddf:bf7:10:1:1::XX
+          netmask 64
+
+      # batman interface
+      iface bat0 inet6 manual
+         pre-up /usr/sbin/batctl if add tap0
+         up /bin/ip link set dev bat0 up
+         post-up /sbin/brctl addif br-fffl bat0
+         post-up /usr/sbin/batctl it 10000
+         post-up /usr/sbin/batctl gw_mode server
+         post-up /sbin/ip rule add from all fwmark 0x1 table 42
+         post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
+         post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
+         post-up /sbin/ip -6 route add fddf:bf7:10:1:1::XX/64 dev br-fffl table 42
+         pre-down /sbin/brctl delif br-fffl bat0 || true
+         down /bin/ip link set dev bat0 down
+
+         # this is for adding the gateway to the map later, not necessarily necessary.
+         # post-up start-stop-daemon -b --start --exec /usr/local/sbin/alfred -- -i br-$FREEMESH_TLD -b bat0 -m
+         # post-up start-stop-daemon -b --start --exec /usr/local/sbin/batadv-vis -- -i bat0 -s
+
+      source /etc/network/interfaces.d/*
+
 
 ## DHCP and DNS
 
