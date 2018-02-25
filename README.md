@@ -298,7 +298,7 @@ The configuration file /etc/dhcp/dhcpd.conf is needed for IPv4 in the freemesh/f
     {
     authorative;
     range 10.129.XX.XX 10.129.XX.254;    # make sure to adjust to your allocated fm/ff ipv4 range
-    option routers 10.129.1.XX;         # make sure to adjust to your gateway fm/ff ipv4
+    option routers 10.129.1.[GWnumber];         # make sure to adjust to your gateway fm/ff ipv4
     }
 
     include "/etc/dhcp/static.conf";
