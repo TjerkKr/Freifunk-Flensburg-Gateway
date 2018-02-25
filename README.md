@@ -43,6 +43,16 @@
 
 ## B.A.T.M.A.N. and fastd
 
+add jessie-backports to your /etc/apt/sources.list, then
+
+    echo "deb https://repo.universe-factory.net/debian/ sid main" >>/etc/apt/sources.list
+    gpg --keyserver pgpkeys.mit.edu --recv-key  16EF3F64CB201D9C
+    gpg -a --export 16EF3F64CB201D9C | apt-key add -
+
+    apt-get update
+    apt-get install batctl fastd bridge-utils
+
+
 ## add repo.universe-factory.net repository
 
 ## downgrade to batman 14
