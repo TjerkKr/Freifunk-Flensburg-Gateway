@@ -444,6 +444,8 @@ make the script executable
 
 chmod +x /root/bin/vpn.up
 
+
+
   Then create a script for, that is executed, after the VPN has come down in /root/bin/vpn.down and make it executable.
 
       #!/bin/sh
@@ -451,6 +453,8 @@ chmod +x /root/bin/vpn.up
       /sbin/ip -6 route del default table 42
       /sbin/ip route add default dev tun0 table 42
       /sbin/ip -6 route add default dev tun0 table 42
+      
+      
       
 make the script executable
 
@@ -489,6 +493,7 @@ Speedtest to tun0 and public VPN
 make the script executable
 
 chmod +x /etc/fastd/reloadPeers.sh
+
 
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
