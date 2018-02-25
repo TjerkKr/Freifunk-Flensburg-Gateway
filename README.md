@@ -1,7 +1,7 @@
 
 Installation of a Gateway for Freifunk Flensburg
 
-* [note](#note)
+* [Nat note](#note)
 * [Requirements](#requirements)
 * [Installation](#installation)
     * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
@@ -14,7 +14,7 @@ Installation of a Gateway for Freifunk Flensburg
   * [DNS bind9](#dns-bind9)
 * [VPN](#vpn)
 
-## Note
+## Nat note
 Also one little side note: This guide has IPv6 NAT configuration in it. I strongly recommend against it. With the use of Mullvad or AirVPN tunnels, it's the only way IPv6 connectivity can be made, so it was used in this case. It will break stuff the same way as IPv4 NAT breaks stuff and shouldn't be needed, as IPv6 is available in vast amounts. Also, IPv6 NAT requires kernel 3.9 as a minimum specification. 
 
 ## Requirements
