@@ -1,5 +1,5 @@
 
-Installation of a Gateway for Freifunk Flensburg
+# Installation of a Freemesh Gateway for Freifunk Flensburg
 
 * [Nat note](#nat-note)
 * [Requirements](#requirements)
