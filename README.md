@@ -3,7 +3,7 @@
 
 * [Requirements](#requirements)
 * [Installation](#installation)
-  * [npm start](#npm-start)
+  * [Install a minimal Debian](#install-a-minimal-debian)
   * [npm test](#npm-test)
   * [npm run ios](#npm-run-ios)
   * [npm run android](#npm-run-android)
@@ -29,7 +29,7 @@ Upgrading to a new version of React Native requires updating the `react-native`,
 
 If yarn was installed when the project was initialized, then dependencies will have been installed via yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for yarn and npm at the time of this writing.
 
-### `npm start`
+## Install a minimal Debian
 
 Runs your app in development mode.
 
