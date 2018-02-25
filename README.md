@@ -8,7 +8,7 @@
    * [add repo.universe-factory.net repository](#add-repo.universe-factory.net-repository)
    * [downgrade to batman 14](#downgrade-to-batman-14)
    * [This is needed for any version](#this-is-needed-for-any-version)
-  * [Networking](#networking)
+* [Networking](#networking)
   * [DHCP and DNS](#dhcp-and-dns)
   * [DHCP radvd IPv6](#dhcp-radvd-ipv6)
   * [DHCP isc-dhcp-server IPv4 and IPv6](#dhcp-isc-dhcp-server-ipv4-and-ipv6)
