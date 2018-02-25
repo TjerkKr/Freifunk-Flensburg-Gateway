@@ -303,7 +303,7 @@ And create the configuration file /etc/dhcp/dhcpd6.conf for the IPv6 portion.
     log-facility local7;
 
     subnet6 fddf:bf7:10:1::/64 {  # for example: fdec:c0f1:afda::/64
-       option dhcp6.name-servers fddf:bf7:10:1:1::XX;  # make sure to adjust to your gateway fm/ff ipv6
+       option dhcp6.name-servers fddf:bf7:10:1:1::[GWnumber];  # make sure to adjust to your gateway fm/ff ipv6
        option dhcp6.domain-search "fffl";
     }
 
