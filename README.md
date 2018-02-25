@@ -440,6 +440,10 @@ First create /root/bin
       /sbin/ip route add default dev tun0 table 42
       /sbin/ip -6 route add default dev tun0 table 42
      
+make the script executable
+
+chmod +x /root/bin/vpn.up
+
   Then create a script for, that is executed, after the VPN has come down in /root/bin/vpn.down and make it executable.
 
       #!/bin/sh
@@ -447,6 +451,11 @@ First create /root/bin
       /sbin/ip -6 route del default table 42
       /sbin/ip route add default dev tun0 table 42
       /sbin/ip -6 route add default dev tun0 table 42
+      
+make the script executable
+
+chmod +x /root/bin/vpn.down
+
       
  You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on what you want) from Mullvad. You'll find that in Download - iOS, Android and other platforms - Instructions and configuration files. Select your configuration and servers, then get the config. Place the file in /etc/openvpn and rename it to *.conf, as openvpn won't pick it up otherwise.
 
@@ -477,6 +486,9 @@ Speedtest to tun0 and public VPN
       #Source: https://github.com/Wlanfr3ak/auto-speedtest
 
 
-   chmod +x /root/bin/speedtest.sh
+make the script executable
+
+chmod +x /etc/fastd/reloadPeers.sh
+
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
