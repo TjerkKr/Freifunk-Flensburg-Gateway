@@ -376,6 +376,8 @@ and you can now restart the dhcpd services
 
 ## DNS bind9
 
+block dns leak
+
 Edit the file /etc/bind/named.conf.options
 
     options {
