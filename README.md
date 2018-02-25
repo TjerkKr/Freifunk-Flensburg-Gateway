@@ -6,7 +6,7 @@
   * [Install a minimal Debian](#install-a-minimal-debian)
   * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.and-fastd)
   * [Networking](#networking)
-  * [npm run android](#npm-run-android)
+  * [DHCPv6 and DNS](#dhcpv6-and-dns)
   * [npm run eject](#npm-run-eject)
 * [Writing and Running Tests](#writing-and-running-tests)
 * [Customizing App Display Name and Icon](#customizing-app-display-name-and-icon)
@@ -43,7 +43,7 @@ Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
 
 Like `npm start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
 
-#### `npm run android`
+## DHCPv6 and DNS
 
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
 
