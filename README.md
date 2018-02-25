@@ -441,11 +441,13 @@ First create /root/bin
       
  You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on what you want) from Mullvad. You'll find that in Download - iOS, Android and other platforms - Instructions and configuration files. Select your configuration and servers, then get the config. Place the file in /etc/openvpn and rename it to *.conf, as openvpn won't pick it up otherwise.
 
-In the file add the following just above the <ca> section. 
+In the file add the following just above the <ca> section.
+   
+   
 
 Speedtest to tun0 and public VPN
 
-
+ Create /root/bin/speedtest.sh
  
       #!/bin/sh
       GWIP=10.129.1.XX
@@ -460,6 +462,7 @@ Speedtest to tun0 and public VPN
       ippublic=$(wget http://checkip.dyndns.org -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>')
       echo ISP: $ippublic
       echo
+      
 
       #Source: https://github.com/Wlanfr3ak/auto-speedtest
 
