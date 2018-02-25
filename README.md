@@ -4,7 +4,7 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
   * [Install a minimal Debian](#install-a-minimal-debian)
-  * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n. and fastd)
+  * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
   * [npm run ios](#npm-run-ios)
   * [npm run android](#npm-run-android)
   * [npm run eject](#npm-run-eject)
