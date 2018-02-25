@@ -64,6 +64,35 @@ add batman-adv to your /etc/modules to autoload it on boot and activate it:
      echo "batman-adv" >> /etc/modules
      modprobe batman-adv
      
+create the directory for your fastd peers:
+     
+     mkdir -p /etc/fastd/vpn/peers
+     
+create the keys for fastd:
+
+    fastd --generate-key > /root/fastd-keys.pub.sec
+    
+Backup the key pair `/root/fastd-keys.pub.sec` in a safe place. This will be needed both for the server and for the image builds.
+
+create the .conf for fastd:
+
+nano /etc/fastd/vpn/fastd.conf
+
+    #log level warn;
+    #hide ip addresses yes;
+    #hide mac addresses yes;
+    bind any:10006 interface "eth0";
+    method "salsa2012+umac";  	#
+    mtu 1406;			 # 1280 bytes for the client and 24 bytes for the batman unicast header
+    include "secret.conf";  	# include the secret.conf with your private secret key from the /root/fastd-keys.pub.sec 
+    include peers from "peers";     # your peerlist with the other gateways
+    on verify "true";		# this allows any unknown node to connect to your fastd
+    on up "
+      /sbin/ifup bat0
+      /bin/ip link set dev tap0 address 00:00:ff:f1:01:[GWnumber]
+      /bin/ip link set dev tap0 up
+    ";
+
 ## Networking
 
 ## DHCP and DNS
