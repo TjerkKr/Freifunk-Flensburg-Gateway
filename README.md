@@ -13,7 +13,7 @@ Installation of a Gateway for Freifunk Flensburg
   * [DHCP radvd IPv6](#dhcp-radvd-ipv6)
   * [DHCP isc-dhcp-server IPv4 and IPv6](#dhcp-isc-dhcp-server-ipv4-and-ipv6)
   * [DNS bind9](#dns-bind9)
-    * [Disabled DNS-leak](#Disabled-DNS-leak)
+    * [Disabled DNS-leak](#disabled-dns-leak)
 * [VPN](#vpn)
   * [Speedtest Skript](#speedtest-skript)
 
