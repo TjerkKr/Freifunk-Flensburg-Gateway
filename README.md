@@ -40,7 +40,7 @@
  
         apt-get install screen htop iftop traceroute mtr-tiny mc speedtest-cli openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https postfix bind9 sudo git apt-transport-https
 
-## b.a.t.m.a.n. and fastd
+## B.A.T.M.A.N. and fastd
 
 add jessie-backports to your /etc/apt/sources.list, then
 
