@@ -7,6 +7,7 @@ Installation of a Gateway for Freifunk Flensburg
     * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
     * [downgrade to batman 14](#downgrade-to-batman-14)
       * [This is needed for any version](#this-is-needed-for-any-version)
+    * [Fastd](#fastd)
 * [Networking](#networking)
 * [DHCP and DNS](#dhcp-and-dns)
   * [DHCP radvd IPv6](#dhcp-radvd-ipv6)
@@ -69,6 +70,7 @@ add batman-adv to your /etc/modules to autoload it on boot and activate it:
      echo "batman-adv" >> /etc/modules
      modprobe batman-adv
      
+## Fastd
 create the directory for your fastd peers:
      
      mkdir -p /etc/fastd/vpn/peers
