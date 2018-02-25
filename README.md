@@ -4,7 +4,7 @@
 * [Nat note](#nat-note)
 * [Requirements](#requirements)
 * [Installation](#installation)
-    * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n-and-fastd)
+    * [B.A.T.M.A.N and fastd](#b.a.t.m.a.n-and-fastd)
     * [downgrade to batman 14](#downgrade-to-batman-14)
       * [This is needed for any version](#this-is-needed-for-any-version)
     * [Fastd](#fastd)
