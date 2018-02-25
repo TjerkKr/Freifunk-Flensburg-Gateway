@@ -25,14 +25,21 @@
     recommended is also a VPN provider for tunneling the traffic out
 
 ## Installation
-    make sure to set the hostname and domain-name
+   * 1. Install a minimal Debian jessie
+    make sure to set the hostname and domainname:
+    
+    hostname $FREEMESH_HOSTNAME
+    echo "127.0.0.1 $FREEMESH_DOMAIN_NAME $FREEMESH_HOSTNAME" >>/etc/hosts
+    echo $FREEMESH_HOSTNAME > /etc/hostname
+
     pick a secure root password.
     create a regular user on the host, then limit Root from being able to log in via ssh
-    install standard system utilities and SSH server.
     
-    hostname FREEMESH_HOSTNAME
-    echo "127.0.0.1 FREEMESH_DOMAIN_NAME FREEMESH_HOSTNAME" >>/etc/hosts
-    echo FREEMESH_HOSTNAME > /etc/hostname
+    apt-get update
+    apt-get upgrade
+    
+    * 2. Stuff that is needed
+   
     
 ## Install a minimal Debian
 
