@@ -235,7 +235,7 @@ give the new IP4 and IPv6 to the bridge:
 
 ## DHCP and DNS
 
-DHCP radvd IPv6
+## DHCP radvd IPv6
 
 The file /etc/radvd.conf has to be edited.
 
@@ -271,10 +271,146 @@ The file /etc/radvd.conf has to be edited.
 
        service radvd restart
 
-## DHCP radvd IPv6
-
 ## DHCP isc-dhcp-server IPv4 and IPv6
 
+The isc-dhcp-server can not provider IPv4 and IPv6 requests at the same time, so you need to start it in 2 different instances.
+
+The configuration file /etc/dhcp/dhcpd.conf is needed for IPv4 in the freemesh/freifunk network. 
+
+
+    log-facility local6;  #disabled logging
+    ddns-update-style none;
+    option domain-name ".fffl";
+    option domain-name-servers 10.129.1.[GWnumber]; # make sure to adjust to your gateway fm/ff ipv4
+    default-lease-time 300;
+    max-lease-time 3600;
+    log-facility local7;
+    subnet 10.129.0.0 netmask 255.255.0.0
+    {
+    authorative;
+    range 10.129.XX.XX 10.129.XX.254;    # make sure to adjust to your allocated fm/ff ipv4 range
+    option routers 10.129.1.XX;         # make sure to adjust to your gateway fm/ff ipv4
+    }
+
+    include "/etc/dhcp/static.conf";
+
+Next create an empty static.conf file. 
+
+    touch /etc/dhcp/static.conf
+    
+And create the configuration file /etc/dhcp/dhcpd6.conf for the IPv6 portion. 
+    
+    log-facility local7;
+
+    subnet6 fddf:bf7:10:1::/64 {  # for example: fdec:c0f1:afda::/64
+       option dhcp6.name-servers fddf:bf7:10:1:1::XX;  # make sure to adjust to your gateway fm/ff ipv6
+       option dhcp6.domain-search "fffl";
+    }
+
+
+Then edit the default start-up files for the ISC dhcpd.
+
+Edit the following sections in /etc/default/isc-dhcp-server
+
+    # Additional options to start dhcpd with.
+    #   Don't use options -cf or -pf here; use DHCPD_CONF/ DHCPD_PID instead
+    OPTIONS="-4"
+    
+    # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+    # Separate multiple interfaces with spaces, e.g. "eth0 eth1".
+    INTERFACES="br-fffl"
+    
+    
+Create /etc/default/isc-dhcp6-server
+
+    nano /etc/default/isc-dhcp6-server
+    
+    # Path to dhcpd's config file (default: /etc/dhcp/dhcpd.conf).
+    DHCPD_CONF=/etc/dhcp/dhcpd6.conf
+
+    # Path to dhcpd's PID file (default: /var/run/dhcpd.pid).
+    DHCPD_PID=/var/run/dhcpd6.pid
+
+    # Additional options to start dhcpd with.
+    #   Don't use options -cf or -pf here; use DHCPD_CONF/ DHCPD_PID instead
+    OPTIONS="-6"
+
+    # On what interfaces should the DHCP server (dhcpd) serve DHCP requests?
+    #   Separate multiple interfaces with spaces, e.g. "eth0 eth1".
+    INTERFACES="br-fffl"
+
+execute the following commands
+
+    touch /var/lib/dhcp/dhcpd6.leases
+    cp /etc/init.d/isc-dhcp-server /etc/init.d/isc-dhcp6-server
+    
+    
+edit /etc/init.d/isc-dhcp6-server in 2 places.
+
+Replace
+
+    # Provides:          isc-dhcp-server
+    
+with
+   
+    # Provides:          isc-dhcp6-server
+
+and replace
+
+    DHCPD_DEFAULT="${DHCPD_DEFAULT:-/etc/default/isc-dhcp-server}"
+    
+with
+
+    DHCPD_DEFAULT="${DHCPD_DEFAULT:-/etc/default/isc-dhcp6-server}"
+    
+then install the init.d script for the IPv6 DHCPd 
+
+    update-rc.d isc-dhcp6-server defaults
+    
+and you can now restart the dhcpd services
+
+    service isc-dhcp-server restart
+    service isc-dhcp6-server restart
+    
+    
+
 ## DNS bind9
+
+Edit the file /etc/bind/named.conf.options
+
+    options {
+           directory "/var/cache/bind";
+           // Source: https://wiki.freifunk.net/Freifunk_Stormarn:Gateway
+           // If there is a firewall between you and nameservers you want
+           // to talk to, you may need to fix the firewall to allow multiple
+           // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+           // If your ISP provided one or more IP addresses for stable
+           // nameservers, you probably want to use them as forwarders.
+           // Uncomment the following block, and insert the addresses replacing
+           // the all-0's placeholder.
+           forwarders {
+                 10.4.0.1;
+                 10.5.0.1;
+                 10.6.0.1;
+                 10.7.0.1;
+                 10.8.0.1;
+                 10.9.0.1;
+                 10.30.0.1;
+                 10.50.0.1;
+           };
+           //========================================================================
+           // If BIND logs error messages about the root key being expired,
+           // you will need to update your keys.  See https://www.isc.org/bind-keys
+           //========================================================================
+          // dnssec-enable yes;
+          // dnssec-validation yes;
+           dnssec-validation no;
+          // dnssec-lookaside auto;
+          // recursion yes;
+          // allow-recursion { localnets; localhost; };
+          auth-nxdomain no;    # conform to RFC1035
+          listen-on-v6 { any; };
+       };
+
 
 ## VPN
