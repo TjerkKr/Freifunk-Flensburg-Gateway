@@ -52,13 +52,21 @@ add jessie-backports to your /etc/apt/sources.list, then
     apt-get update
     apt-get install batctl fastd bridge-utils
 
-
 ## add repo.universe-factory.net repository
 
 ## downgrade to batman 14
-
+    modinfo batman-adv
+    apt-get install batman-adv-dkms
+    dkms remove batman-adv/2013.4.0 --all
+    dkms --force install batman-adv/2013.4.0
+    modprobe batman-adv # (if the wrong version is loaded "rmmod batman-adv" and then repeat the dkms commands)
+    dmesg or batctl -v # (check, to see, that you have the correct version loaded)
 ## This is needed for any version
-
+add batman-adv to your /etc/modules to autoload it on boot and activate it:
+   
+     echo "batman-adv" >> /etc/modules
+     modprobe batman-adv
+     
 ## Networking
 
 ## DHCP and DNS
