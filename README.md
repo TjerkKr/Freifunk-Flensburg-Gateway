@@ -4,7 +4,6 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
     * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
-    * [add repo.universe-factory.net repository](#add-repo.universe-factory.net-repository)
     * [downgrade to batman 14](#downgrade-to-batman-14)
     * [This is needed for any version](#this-is-needed-for-any-version)
 * [Networking](#networking)
@@ -51,8 +50,6 @@ add jessie-backports to your /etc/apt/sources.list, then
 
     apt-get update
     apt-get install batctl fastd bridge-utils
-
-## add repo.universe-factory.net repository
 
 ## downgrade to batman 14
     modinfo batman-adv
