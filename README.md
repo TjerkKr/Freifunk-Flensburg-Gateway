@@ -32,9 +32,9 @@
        echo "127.0.0.1 $FREEMESH_DOMAIN_NAME $FREEMESH_HOSTNAME" >>/etc/hosts
        echo $FREEMESH_HOSTNAME > /etc/hostname
 
-pick a secure root password.
+* pick a secure root password.
 
-create a regular user on the host, then limit Root from being able to log in via ssh
+* create a regular user on the host, then limit Root from being able to log in via ssh
     
        apt-get update
        apt-get upgrade
