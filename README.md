@@ -1,6 +1,6 @@
 # Installation of a Gateway for FreeMesh Flensburg
 
-* [Updating to New Releases](#updating-to-new-releases)
+* [Requirements](#Requirements)
 * [Installation](#Instalation)
   * [Stuff that is needed](#2. Stuff that is needed)
   * [B.A.T.M.A.N. and fastd](#3. B.A.T.M.A.N. and fastd)
