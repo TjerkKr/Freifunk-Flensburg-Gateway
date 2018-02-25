@@ -4,7 +4,7 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
   * [Install a minimal Debian](#install-a-minimal-debian)
-  * [B.A.T.M.A.N. and fastd](#B.A.T.M.A.N. and fastd)
+  * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
   * [add repo.universe-factory.net repository](#add-repo.universe-factory.net-repository)
   * [downgrade to batman 14](#downgrade-to-batman-14)
   * [This is needed for any version](#this-is-needed-for-any-version)
