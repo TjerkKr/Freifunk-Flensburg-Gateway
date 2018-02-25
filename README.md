@@ -4,8 +4,8 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
   * [Install a minimal Debian](#install-a-minimal-debian)
-  * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
-  * [npm run ios](#npm-run-ios)
+  * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.and-fastd)
+  * [Networking](#networking)
   * [npm run android](#npm-run-android)
   * [npm run eject](#npm-run-eject)
 * [Writing and Running Tests](#writing-and-running-tests)
@@ -39,7 +39,7 @@ Open it in the [Expo app](https://expo.io) on your phone to view it. It will rel
 
 Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
 
-#### `npm run ios`
+## Networking
 
 Like `npm start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
 
