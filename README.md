@@ -4,7 +4,7 @@
 * [Nat note](#nat-note)
 * [Requirements](#requirements)
 * [Installation](#installation)
-    * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n..and.fastd)
+    * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n-and-fastd)
     * [downgrade to batman 14](#downgrade-to-batman-14)
       * [This is needed for any version](#this-is-needed-for-any-version)
     * [Fastd](#fastd)
@@ -47,7 +47,7 @@ Also one little side note: This guide has IPv6 NAT configuration in it. I strong
  
         apt-get install screen htop iftop traceroute mtr-tiny mc speedtest-cli openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https postfix bind9 sudo git apt-transport-https vnstat
 
-## B.A.T.M.A.N..and.fastd
+## B.A.T.M.A.N and.fastd
 
 add jessie-backports to your /etc/apt/sources.list, then
 
