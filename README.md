@@ -6,7 +6,7 @@ Installation of a Gateway for Freifunk Flensburg
 * [Installation](#installation)
     * [B.A.T.M.A.N. and fastd](#b.a.t.m.a.n.-and-fastd)
     * [downgrade to batman 14](#downgrade-to-batman-14)
-    *  [This is needed for any version](#this-is-needed-for-any-version)
+     * [This is needed for any version](#this-is-needed-for-any-version)
 * [Networking](#networking)
 * [DHCP and DNS](#dhcp-and-dns)
   * [DHCP radvd IPv6](#dhcp-radvd-ipv6)
