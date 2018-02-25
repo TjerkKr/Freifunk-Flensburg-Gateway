@@ -45,7 +45,7 @@ Also one little side note: This guide has IPv6 NAT configuration in it. I strong
     
  2. Stuff that is needed
  
-        apt-get install screen htop iftop traceroute mtr-tiny mc speedtest-cli openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https postfix bind9 sudo git apt-transport-https
+        apt-get install screen htop iftop traceroute mtr-tiny mc speedtest-cli openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https postfix bind9 sudo git apt-transport-https vnstat
 
 ## B.A.T.M.A.N. and fastd
 
