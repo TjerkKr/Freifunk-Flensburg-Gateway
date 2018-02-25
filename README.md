@@ -1,7 +1,7 @@
 
 ## Table of Contents
 
-* [Updating to New Releases](#updating-to-new-releases)
+* [Requirements](#Requirements)
 * [Available Scripts](#available-scripts)
   * [npm start](#npm-start)
   * [npm test](#npm-test)
@@ -17,7 +17,7 @@
     * [Should I Use ExpoKit?](#should-i-use-expokit)
 * [Tips and Tricks](#tips-and-tricks)
 
-## Updating to New Releases
+## Requirements
 
 You should only need to update the global installation of `create-react-native-app` very rarely, ideally never.
 
