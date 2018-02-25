@@ -430,8 +430,7 @@ First create /root/bin
       /sbin/ip -6 route del default table 42
       /sbin/ip route add default dev tun0 table 42
       /sbin/ip -6 route add default dev tun0 table 42
-      
-      
+     
   Then create a script for, that is executed, after the VPN has come down in /root/bin/vpn.down and make it executable.
 
       #!/bin/sh
@@ -443,7 +442,29 @@ First create /root/bin
  You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on what you want) from Mullvad. You'll find that in Download - iOS, Android and other platforms - Instructions and configuration files. Select your configuration and servers, then get the config. Place the file in /etc/openvpn and rename it to *.conf, as openvpn won't pick it up otherwise.
 
 In the file add the following just above the <ca> section. 
-   
-   
+
+Speedtest to tun0 and public VPN
+
+
+ 
+      #!/bin/sh
+      GWIP=10.129.1.XX
+      echo
+      echo Speedtest via VPN
+      speedtest-cli --simple --server 4617 --source $GWIP --share #ADDIX Internet Services GmbH (Kiel)
+      ipvpn=$(wget http://checkip.dyndns.org --bind-address $GWIP -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>')
+      echo ISP: $ipvpn
+      echo
+      echo Speedtest via Public
+      speedtest-cli --simple --server 4617 --share #ADDIX Internet Services GmbH (Kiel)
+      ippublic=$(wget http://checkip.dyndns.org -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>')
+      echo ISP: $ippublic
+      echo
+
+      #Source: https://github.com/Wlanfr3ak/auto-speedtest
+
+
+
+
    
 from: https://www.freemesh.ie
