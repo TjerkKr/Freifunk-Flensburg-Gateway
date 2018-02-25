@@ -33,7 +33,6 @@
        echo $FREEMESH_HOSTNAME > /etc/hostname
 
 * pick a secure root password.
-
 * create a regular user on the host, then limit Root from being able to log in via ssh
     
        apt-get update
