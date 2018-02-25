@@ -163,8 +163,6 @@ The two forwarding rules will be commented out, so you need to remove the # in f
 
 Edit the file /etc/network/interfaces:
 
-- After the line "FREEMESH" is the config for your Freifunk Community. Add the parts from here and edit it with your settings. 
-
       # This file describes the network interfaces available on your system
       # and how to activate them. For more information, see interfaces(5).
 
@@ -197,12 +195,12 @@ Edit the file /etc/network/interfaces:
           up /sbin/brctl addbr br-fffl
 
       iface br-fffl inet static
-          address 10.129.1.XX
+          address 10.129.1.[GWnumber]
           netmask 255.255.0.0
           bridge-ports none
 
       iface br-fffl inet6 static
-          address fddf:bf7:10:1:1::XX
+          address fddf:bf7:10:1:1::[GWnumber]
           netmask 64
 
       # batman interface
@@ -215,7 +213,7 @@ Edit the file /etc/network/interfaces:
          post-up /sbin/ip rule add from all fwmark 0x1 table 42
          post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
          post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
-         post-up /sbin/ip -6 route add fddf:bf7:10:1:1::XX/64 dev br-fffl table 42
+         post-up /sbin/ip -6 route add fddf:bf7:10:1:1::[GWnumber]/64 dev br-fffl table 42
          pre-down /sbin/brctl delif br-fffl bat0 || true
          down /bin/ip link set dev bat0 down
 
@@ -225,6 +223,15 @@ Edit the file /etc/network/interfaces:
 
       source /etc/network/interfaces.d/*
 
+
+restart the network, so debian apply the changes in the /etc/network/interfaces:
+
+         /etc/init.d/networking restart
+         
+give the new IP4 and IPv6 to the bridge:
+
+    ifconfig br-fffl 10.129.1.[GWnumber]
+    ip a a fddf:bf7:10:1:1::[GWnumber]
 
 ## DHCP and DNS
 
