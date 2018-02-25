@@ -2,7 +2,7 @@
 ## Table of Contents
 
 * [Requirements](#requirements)
-* [Available Scripts](#available-scripts)
+* [Installation](#installation)
   * [npm start](#npm-start)
   * [npm test](#npm-test)
   * [npm run ios](#npm-run-ios)
@@ -25,7 +25,7 @@ Updating the `react-native-scripts` dependency of your app should be as simple a
 
 Upgrading to a new version of React Native requires updating the `react-native`, `react`, and `expo` package versions, and setting the correct `sdkVersion` in `app.json`. See the [versioning guide](https://github.com/react-community/create-react-native-app/blob/master/VERSIONS.md) for up-to-date information about package version compatibility.
 
-## Available Scripts
+## Instalation
 
 If yarn was installed when the project was initialized, then dependencies will have been installed via yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for yarn and npm at the time of this writing.
 
