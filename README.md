@@ -25,7 +25,11 @@
     recommended is also a VPN provider for tunneling the traffic out
 
 ## Installation
-
+    make sure to set the hostname and domain-name
+    pick a secure root password.
+    create a regular user on the host, then limit Root from being able to log in via ssh
+    install standard system utilities and SSH server. 
+    
 ## Install a minimal Debian
 
 ## B.A.T.M.A.N. and fastd
