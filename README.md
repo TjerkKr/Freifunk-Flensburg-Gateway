@@ -13,6 +13,7 @@ Installation of a Gateway for Freifunk Flensburg
   * [DHCP isc-dhcp-server IPv4 and IPv6](#dhcp-isc-dhcp-server-ipv4-and-ipv6)
   * [DNS bind9](#dns-bind9)
 * [VPN](#vpn)
+  * [Speedtest Skript](#speedtest-skript)
 
 ## Nat note
 Also one little side note: This guide has IPv6 NAT configuration in it. I strongly recommend against it. With the use of Mullvad or AirVPN tunnels, it's the only way IPv6 connectivity can be made, so it was used in this case. It will break stuff the same way as IPv4 NAT breaks stuff and shouldn't be needed, as IPv6 is available in vast amounts. Also, IPv6 NAT requires kernel 3.9 as a minimum specification. 
@@ -448,6 +449,7 @@ First create /root/bin
 In the file add the following just above the <ca> section.
    
    
+## Speedtest Skript
 
 Speedtest to tun0 and public VPN
 
