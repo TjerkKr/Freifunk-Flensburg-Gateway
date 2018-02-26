@@ -472,7 +472,7 @@ Speedtest to tun0 and public VPN and generate a speedtest-link
 
 vnStat is easy, as there are Debian packages 
 
-    apt-get install vnstat
+    apt-get install speedtest-cli
     
  Create /root/bin/speedtest.sh
  
