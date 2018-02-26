@@ -442,7 +442,7 @@ First create /root/bin
      
 make the script executable
 
-chmod +x /root/bin/vpn.up
+    chmod +x /root/bin/vpn.up
 
 
 
@@ -454,11 +454,9 @@ chmod +x /root/bin/vpn.up
       /sbin/ip route add default dev tun0 table 42
       /sbin/ip -6 route add default dev tun0 table 42
       
-      
-      
 make the script executable
 
-chmod +x /root/bin/vpn.down
+    chmod +x /root/bin/vpn.down
 
       
  You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on what you want) from Mullvad. You'll find that in Download - iOS, Android and other platforms - Instructions and configuration files. Select your configuration and servers, then get the config. Place the file in /etc/openvpn and rename it to *.conf, as openvpn won't pick it up otherwise.
@@ -468,8 +466,12 @@ In the file add the following just above the <ca> section.
    
 ## Speedtest Skript
 
-Speedtest to tun0 and public VPN
+Speedtest to tun0 and public VPN and generate a speedtest-link
 
+vnStat is easy, as there are Debian packages 
+
+    apt-get install vnstat
+    
  Create /root/bin/speedtest.sh
  
       #!/bin/sh
@@ -492,8 +494,7 @@ Speedtest to tun0 and public VPN
 
 make the script executable
 
-chmod +x /etc/fastd/reloadPeers.sh
-
+    chmod +x /root/bin/speedtest.sh
 
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
