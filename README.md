@@ -15,7 +15,7 @@
   * [DNS bind9](#dns-bind9)
     * [Disabled DNS-leak](#disabled-dns-leak)
 * [VPN](#vpn)
-  * [Statistics](#Statistics)
+* [Statistics](#Statistics)
     * [vnStat](#vnStat)
       * [Speedtest Skript](#speedtest-skript)
 
