@@ -424,6 +424,20 @@ Edit the file /etc/bind/named.conf.options
           auth-nxdomain no;    # conform to RFC1035
           listen-on-v6 { any; };
        };
+       
+## Disabled-logging
+
+Edit the file /etc/bind/named.conf.logging
+
+    logging {
+    channel null { null; };
+    category default { null; };
+    };
+    
+    
+Edit the file /etc/bind/named.conf.logging
+    
+    include "/etc/bind/named.conf.logging";
 
 
 ## VPN
