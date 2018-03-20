@@ -156,11 +156,11 @@ and add these lines in cron with
 
 ## Disabled-fastd-logging
 
-Edit the file /etc/network/interfaces:
+Edit the file /etc/network/interfaces
 
-    #log level warn;
-    #hide ip addresses yes;
-    #hide mac addresses yes;
+    log level warn;
+    hide ip addresses yes;
+    hide mac addresses yes;
 
 ## Networking
 
