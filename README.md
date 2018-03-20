@@ -89,9 +89,6 @@ create the .conf for fastd:
 
 nano /etc/fastd/vpn/fastd.conf
 
-    #log level warn;
-    #hide ip addresses yes;
-    #hide mac addresses yes;
     bind any:10006 interface "eth0";
     method "salsa2012+umac";  	#
     mtu 1406;			 # 1280 bytes for the client and 24 bytes for the batman unicast header
@@ -157,6 +154,13 @@ and add these lines in cron with
     # Regularly update the fastd peers
     */5 * * * * /etc/fastd/reloadPeers.sh
 
+## Disabled-fastd-logging
+
+Edit the file /etc/network/interfaces:
+
+    #log level warn;
+    #hide ip addresses yes;
+    #hide mac addresses yes;
 
 ## Networking
 
