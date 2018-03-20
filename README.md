@@ -508,7 +508,12 @@ vnStat is easy, as there are Debian packages
  Create /root/bin/speedtest.sh
  
       #!/bin/sh
-      GWIP=10.129.1.XX
+      
+      TLD=fffl
+
+      #Source https://stackoverflow.com/questions/11482951/extracting-ip-address-from-a-line-from-ifconfig-output-with-grep
+      GWIP=$(ip -o -4 addr show dev br-$TLD | sed 's/.* inet \([^/]*\).*/\1/' &> /dev/null;)
+
       echo
       echo Speedtest via VPN
       speedtest-cli --simple --server 4617 --source $GWIP --share #ADDIX Internet Services GmbH (Kiel)
