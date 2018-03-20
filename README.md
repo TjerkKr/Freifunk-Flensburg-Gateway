@@ -285,6 +285,19 @@ The file /etc/radvd.conf has to be edited.
    You can restart it now. 
 
        service radvd restart
+       
+       
+## Disabled
+
+edit /etc/init.d/radvd
+
+
+    DOPTIONS="-u radvd -p $PIDFILE"
+    
+with
+
+    OPTIONS="-m none -u radvd -p $PIDFILE"
+       
 
 ## DHCP isc-dhcp-server IPv4 and IPv6
 
