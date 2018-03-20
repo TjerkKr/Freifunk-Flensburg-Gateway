@@ -452,7 +452,7 @@ Edit the file /etc/bind/named.conf.logging
     };
     
     
-Edit the file /etc/bind/named.conf.logging
+Edit the file /etc/bind/named.conf
     
     include "/etc/bind/named.conf.logging";
 
