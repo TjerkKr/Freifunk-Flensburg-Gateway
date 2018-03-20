@@ -533,6 +533,14 @@ vnStat is easy, as there are Debian packages
 make the script executable
 
     chmod +x /root/bin/speedtest.sh
+    
+    
+Create a ramdisk:
+
+    tmpfs     /tmp           tmpfs     size=100M      0      0
+    tmpfs     /var/tmp       tmpfs     size=100M      0      0
+    tmpfs     /var/log       tmpfs     size=100M     0      0
+    tmpfs     /var/lock      tmpfs     size=100M     0      0
 
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
