@@ -279,18 +279,6 @@ The file /etc/radvd.conf has to be edited.
 
        service radvd restart
        
-       
-## Disabled
-
-edit /etc/init.d/radvd
-
-
-    DOPTIONS="-u radvd -p $PIDFILE"
-    
-with
-
-    OPTIONS="-m none -u radvd -p $PIDFILE"
-       
 
 ## DHCP isc-dhcp-server IPv4 and IPv6
 
@@ -391,9 +379,7 @@ then install the init.d script for the IPv6 DHCPd
 and you can now restart the dhcpd services
 
     service isc-dhcp-server restart
-    service isc-dhcp6-server restart
-    
-    
+    service isc-dhcp6-server restart  
 
 ## DNS bind9
 
@@ -522,20 +508,33 @@ vnStat is easy, as there are Debian packages
 
       #Source: https://github.com/Wlanfr3ak/auto-speedtest
 
-## Disabled-fastd-logging
-
-Edit the file /etc/network/interfaces
-
-    log level warn;
-    hide ip addresses yes;
-    hide mac addresses yes;
-
 make the script executable
 
     chmod +x /root/bin/speedtest.sh
     
     
-Create a ramdisk:
+## Disabled-fastd-logging
+
+Edit the file nano /etc/fastd/vpn/fastd.conf
+
+    log level warn;
+    hide ip addresses yes;
+    hide mac addresses yes;
+    
+## Disabled-radvd
+
+Edit the file /etc/fastd/vpn/fastd.conf
+
+Replace
+
+    DOPTIONS="-u radvd -p $PIDFILE"
+    
+with
+
+    OPTIONS="-m none -u radvd -p $PIDFILE"
+
+
+## Create-ramdisk:
 
     tmpfs     /tmp           tmpfs     size=100M      0      0
     tmpfs     /var/tmp       tmpfs     size=100M      0      0
