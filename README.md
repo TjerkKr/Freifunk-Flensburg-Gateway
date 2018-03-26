@@ -18,6 +18,7 @@
 * [Statistics](#Statistics)
     * [vnStat](#vnStat)
       * [Speedtest Skript](#speedtest-skript)
+* [Disabled-Loging]
 
 ## Nat note
 Also one little side note: This guide has IPv6 NAT configuration in it. I strongly recommend against it. With the use of Mullvad or AirVPN tunnels, it's the only way IPv6 connectivity can be made, so it was used in this case. It will break stuff the same way as IPv4 NAT breaks stuff and shouldn't be needed, as IPv6 is available in vast amounts. Also, IPv6 NAT requires kernel 3.9 as a minimum specification. 
@@ -153,14 +154,6 @@ and add these lines in cron with
     
     # Regularly update the fastd peers
     */5 * * * * /etc/fastd/reloadPeers.sh
-
-## Disabled-fastd-logging
-
-Edit the file /etc/network/interfaces
-
-    log level warn;
-    hide ip addresses yes;
-    hide mac addresses yes;
 
 ## Networking
 
@@ -529,6 +522,13 @@ vnStat is easy, as there are Debian packages
 
       #Source: https://github.com/Wlanfr3ak/auto-speedtest
 
+## Disabled-fastd-logging
+
+Edit the file /etc/network/interfaces
+
+    log level warn;
+    hide ip addresses yes;
+    hide mac addresses yes;
 
 make the script executable
 
