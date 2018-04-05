@@ -422,21 +422,6 @@ Edit the file /etc/bind/named.conf.options
           auth-nxdomain no;    # conform to RFC1035
           listen-on-v6 { any; };
        };
-       
-## Disabled-logging
-
-Edit the file /etc/bind/named.conf.logging
-
-    logging {
-    channel null { null; };
-    category default { null; };
-    };
-    
-    
-Edit the file /etc/bind/named.conf
-    
-    include "/etc/bind/named.conf.logging";
-
 
 ## VPN
 
@@ -543,7 +528,21 @@ Edit the file /etc/fstab/
     tmpfs     /var/tmp       tmpfs     size=100M      0      0
     tmpfs     /var/log       tmpfs     size=100M     0      0
     tmpfs     /var/lock      tmpfs     size=100M     0      0
+    
+    
+ ## Disabled-Logging DNS
 
+Edit the file /etc/bind/named.conf.logging
+
+    logging {
+    channel null { null; };
+    category default { null; };
+    };
+    
+Edit the file /etc/bind/named.conf
+    
+    include "/etc/bind/named.conf.logging";
+    
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
 
