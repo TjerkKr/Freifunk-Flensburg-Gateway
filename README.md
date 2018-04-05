@@ -543,6 +543,29 @@ Edit the file /etc/bind/named.conf
     
     include "/etc/bind/named.conf.logging";
     
+    
+    
+edit /etc/rsyslog.conf
+
+Replace
+
+    mail,news.none;              -/var/log/messages
+
+with
+
+    mail,news.none;local7.none              -/var/log/messages
+
+and replace
+
+    *.*;auth,authpriv.none;              -/var/log/syslog
+    
+with
+
+    *.*;auth,authpriv.none;local7.none              -/var/log/syslog
+    
+You can restart it now.
+
+service radvd restart
 
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
 
