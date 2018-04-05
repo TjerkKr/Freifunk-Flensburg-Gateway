@@ -48,7 +48,7 @@ Also one little side note: This guide has IPv6 NAT configuration in it. I strong
     
  2. Stuff that is needed
  
-        apt-get install screen htop iftop traceroute mtr-tiny mc openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https postfix bind9 sudo git apt-transport-https vnstat
+        apt-get install screen htop iftop traceroute mtr-tiny mc openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https bind9 sudo git apt-transport-https vnstat
 
 ## B.A.T.M.A.N and fastd
 
@@ -67,7 +67,9 @@ add jessie-backports to your /etc/apt/sources.list, then
     dkms remove batman-adv/2013.4.0 --all
     dkms --force install batman-adv/2013.4.0
     modprobe batman-adv # (if the wrong version is loaded "rmmod batman-adv" and then repeat the dkms commands)
-    dmesg or batctl -v # (check, to see, that you have the correct version loaded)
+    dmesg or batctl -v or cat /sys/module/batman_adv/version # (check, to see, that you have the correct version loaded)
+    
+    
 ## This is needed for any version
 add batman-adv to your /etc/modules to autoload it on boot and activate it:
    
@@ -535,6 +537,7 @@ with
 
 
 ## Create-ramdisk:
+Edit the file /etc/fstab/
 
     tmpfs     /tmp           tmpfs     size=100M      0      0
     tmpfs     /var/tmp       tmpfs     size=100M      0      0
