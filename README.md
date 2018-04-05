@@ -548,7 +548,7 @@ Edit the file /etc/dhcp/dhcpd.conf
 
     log-facility local7;
     
-edit /etc/rsyslog.conf in 2 places.
+Edit /etc/rsyslog.conf in 2 places.
 
 Replace
 
