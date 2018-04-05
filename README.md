@@ -288,8 +288,6 @@ The isc-dhcp-server can not provider IPv4 and IPv6 requests at the same time, so
 
 The configuration file /etc/dhcp/dhcpd.conf is needed for IPv4 in the freemesh/freifunk network. 
 
-
-    log-facility local6;  #disabled logging
     ddns-update-style none;
     option domain-name ".fffl";
     option domain-name-servers 10.129.1.[GWnumber]; # make sure to adjust to your gateway fm/ff ipv4
