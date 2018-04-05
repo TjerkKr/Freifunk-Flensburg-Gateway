@@ -544,8 +544,11 @@ Edit the file /etc/bind/named.conf
     include "/etc/bind/named.conf.logging";
     
     
+Edit the file /etc/dhcp/dhcpd.conf
+
+    log-facility local7;
     
-edit /etc/rsyslog.conf
+edit /etc/rsyslog.conf in 2 places.
 
 Replace
 
