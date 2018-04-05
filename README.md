@@ -560,9 +560,6 @@ Create /etc/openvpn/airvpn.conf
     remote 31.3.152.99			   #SE-Stockholm_Norma
     ###############################################################
     resolv-retry infinite
-    nobind
-    persist-key
-    persist-tun
     remote-cert-tls server
     cipher AES-256-CBC
     comp-lzo no
@@ -573,8 +570,10 @@ Create /etc/openvpn/airvpn.conf
 
     #Connect to random server
     remote-random
-
+    
+    #restart after n seconds pass without reception of a ping or other packet from remote. 
     ping-restart 20
+    
     # Most clients don't need to bind to
     # a specific local port number.
     nobind
@@ -592,6 +591,7 @@ Create /etc/openvpn/airvpn.conf
     route-noexec
     up /root/bin/vpn.up
     down /root/bin/vpn.down
+    #############################
     ping 10
     tun-ipv6
 
