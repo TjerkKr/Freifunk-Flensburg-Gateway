@@ -463,7 +463,7 @@ In the file add the following just above the <ca> section.
    
 ## Speedtest Skript
 
-Speedtest to tun0 and public VPN and generate a speedtest-link
+Speedtest to tun0 and public VPN and generate a speedtest.net picture link
 
 vnStat is easy, as there are Debian packages 
 
@@ -540,11 +540,6 @@ Edit the file /etc/bind/named.conf.logging
 Edit the file /etc/bind/named.conf
     
     include "/etc/bind/named.conf.logging";
-    
-    
-Edit the file /etc/dhcp/dhcpd.conf
-
-    log-facility local7;
     
 Edit /etc/rsyslog.conf in 2 places.
 
