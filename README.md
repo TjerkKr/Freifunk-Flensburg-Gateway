@@ -227,8 +227,8 @@ Edit the file /etc/network/interfaces:
          up /bin/ip link set dev bat0 up
          post-up /sbin/brctl addif br-fffl bat0
          post-up /usr/sbin/batctl it 10000
-         post-up /usr/sbin/batctl gw_mode server #Activate the gateway announcements on a node
-         #post-up /usr/sbin/batctl gw_mode off #Disabled the gateway announcements on a node
+         post-up /usr/sbin/batctl gw_mode server      #Activate the gateway announcements on a node
+         #post-up /usr/sbin/batctl gw_mode off        #Disabled the gateway announcements on a node
          post-up /sbin/ip rule add from all fwmark 0x1 table 42
          post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
          post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
