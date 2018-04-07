@@ -246,6 +246,11 @@ restart the network, so debian apply the changes in the /etc/network/interfaces:
 
          /etc/init.d/networking restart
          
+         
+The mode of the current node can be seen by running:
+
+         batctl gw_mode
+      
 give the new IP4 and IPv6 to the bridge:
 
     ifconfig br-fffl 10.129.1.[GWnumber]
