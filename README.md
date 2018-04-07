@@ -156,6 +156,14 @@ and add these lines in cron with
     
     # Regularly update the fastd peers
     */5 * * * * /etc/fastd/reloadPeers.sh
+    
+    
+gateway status
+
+To see all available gateways and their announced throughput run:
+
+    batctl gwl
+
 
 ## Networking
 
