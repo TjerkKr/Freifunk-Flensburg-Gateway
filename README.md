@@ -490,17 +490,17 @@ Create /etc/openvpn/airvpn.conf
     remote 213.152.162.153        #NL-Alblasserdam-Muscida
     remote 213.152.161.180        #NL-Alblasserdam_Alchiba
     remote 213.152.161.116        #NL-Alblasserdam_Alcyone
-    remote 109.202.107.9		   #NL-Alblasserdam_Alphard
-    remote 109.202.107.4			#NL-Alblasserdam_Alphecca
-    remote 109.202.107.146       #NL-Alblasserdam_Alphirk
-    remote 213.152.162.78			#NL-Alblasserdam_Alrai
-    remote 213.152.161.4			#NL-Alblasserdam_Alshat
-    remote 213.152.161.16        #NL-Alblasserdam_Alterf
-    remote 109.202.107.14			#NL-Alblasserdam_Alzirr
-    remote 213.152.162.164			#NL-Alblasserdam_Ancha
-    remote 213.152.161.228			#NL-Alblasserdam_Andromeda
-    remote 109.202.103.169			#NL-Alblasserdam_Anser
-    remote 109.202.107.19			#NL-Alblasserdam_Asellus
+    remote 109.202.107.9        #NL-Alblasserdam_Alphard
+    remote 109.202.107.4        #NL-Alblasserdam_Alphecca
+    remote 109.202.107.146        #NL-Alblasserdam_Alphirk
+    remote 213.152.162.78        #NL-Alblasserdam_Alrai
+    remote 213.152.161.4        #NL-Alblasserdam_Alshat
+    remote 213.152.161.16         #NL-Alblasserdam_Alterf
+    remote 109.202.107.14        #NL-Alblasserdam_Alzirr
+    remote 213.152.162.164        #NL-Alblasserdam_Ancha
+    remote 213.152.161.228        #NL-Alblasserdam_Andromeda
+    remote 109.202.103.169        #NL-Alblasserdam_Anser
+    remote 109.202.107.19        #NL-Alblasserdam_Asellus
     remote 213.152.161.9			#NL-Alblasserdam_Atik
     remote 213.152.161.218			#NL-Alblasserdam_Canis
     remote 213.152.162.169			#NL-Alblasserdam_Caph
