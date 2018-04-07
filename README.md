@@ -487,9 +487,9 @@ Create /etc/openvpn/airvpn.conf
 
     ###########################Netherland##############################
     remote 213.152.162.93        #NL-Alblasserdam-Gienah
-    remote 213.152.162.153       #NL-Alblasserdam-Muscida
-    remote 213.152.161.180       #NL-Alblasserdam_Alchiba
-    remote 213.152.161.116       #NL-Alblasserdam_Alcyone
+    remote 213.152.162.153        #NL-Alblasserdam-Muscida
+    remote 213.152.161.180        #NL-Alblasserdam_Alchiba
+    remote 213.152.161.116        #NL-Alblasserdam_Alcyone
     remote 109.202.107.9		   #NL-Alblasserdam_Alphard
     remote 109.202.107.4			#NL-Alblasserdam_Alphecca
     remote 109.202.107.146       #NL-Alblasserdam_Alphirk
