@@ -486,16 +486,16 @@ Create /etc/openvpn/airvpn.conf
     port 443
 
     ###########################Netherland##############################
-    remote 213.152.162.93			#NL-Alblasserdam-Gienah
-    remote 213.152.162.153          #NL-Alblasserdam-Muscida
-    remote 213.152.161.180          #NL-Alblasserdam_Alchiba
-    remote 213.152.161.116          #NL-Alblasserdam_Alcyone
-    remote 109.202.107.9			#NL-Alblasserdam_Alphard
+    remote 213.152.162.93        #NL-Alblasserdam-Gienah
+    remote 213.152.162.153       #NL-Alblasserdam-Muscida
+    remote 213.152.161.180       #NL-Alblasserdam_Alchiba
+    remote 213.152.161.116       #NL-Alblasserdam_Alcyone
+    remote 109.202.107.9		   #NL-Alblasserdam_Alphard
     remote 109.202.107.4			#NL-Alblasserdam_Alphecca
-    remote 109.202.107.146          #NL-Alblasserdam_Alphirk
+    remote 109.202.107.146       #NL-Alblasserdam_Alphirk
     remote 213.152.162.78			#NL-Alblasserdam_Alrai
     remote 213.152.161.4			#NL-Alblasserdam_Alshat
-    remote 213.152.161.16           #NL-Alblasserdam_Alterf
+    remote 213.152.161.16        #NL-Alblasserdam_Alterf
     remote 109.202.107.14			#NL-Alblasserdam_Alzirr
     remote 213.152.162.164			#NL-Alblasserdam_Ancha
     remote 213.152.161.228			#NL-Alblasserdam_Andromeda
@@ -509,7 +509,7 @@ Create /etc/openvpn/airvpn.conf
     remote 213.152.162.14			#NL-Alblasserdam_Crater
     remote 213.152.161.243			#NL-Alblasserdam_Cygnus
     remote 213.152.161.164			#NL-Alblasserdam_Diphda
-    remote 213.152.161.210		#NL-Alblasserdam_Edasich
+    remote 213.152.161.210       #NL-Alblasserdam_Edasich
     remote 213.152.180.4			#NL-Alblasserdam_Elnath
     remote 213.152.162.73			#NL-Alblasserdam_Garnet
     remote 213.152.161.100			#NL-Alblasserdam_Gianfar
@@ -571,7 +571,7 @@ Create /etc/openvpn/airvpn.conf
     remote 62.102.148.147			#SE-Uppsala_Algorab
     remote 62.102.148.142			#SE-Uppsala_Algieba
     remote 62.102.148.149			#SE-Uppsala_Albali
-    remote 31.3.152.99			   #SE-Stockholm_Norma
+    remote 31.3.152.99           #SE-Stockholm_Norma
     ###############################################################
     resolv-retry infinite
     remote-cert-tls server
@@ -712,7 +712,7 @@ You can restart it now.
 service radvd restart
 
 
-
+    from: https://www.open-mesh.org/projects/batman-adv/wiki/Gateways
     from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
     from: http://ffmwu-gateway-doku.readthedocs.io/de/latest/configuration/cleanup.html
     from: https://wiki.freifunk.net/Hamburg/Gateway#IPv4_DHCP_konfigurieren
