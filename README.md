@@ -631,12 +631,12 @@ vnStat is easy, as there are Debian packages
       echo
       echo Speedtest via VPN
       speedtest-cli --simple --server 4617 --source $GWIP --share #ADDIX Internet Services GmbH (Kiel)
-      ipvpn=$(wget http://checkip.dyndns.org --bind-address $GWIP -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>')
+      ipvpn=$(wget http://checkip.dyndns.org --bind-address $GWIP -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>' &> /dev/null;)
       echo ISP: $ipvpn
       echo
       echo Speedtest via Public
       speedtest-cli --simple --server 4617 --share #ADDIX Internet Services GmbH (Kiel)
-      ippublic=$(wget http://checkip.dyndns.org -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>')
+      ippublic=$(wget http://checkip.dyndns.org -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>' &> /dev/null;)
       echo ISP: $ippublic
       echo
       
