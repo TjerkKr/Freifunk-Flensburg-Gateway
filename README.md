@@ -613,7 +613,7 @@ Create /etc/openvpn/airvpn.conf
 
 ## Speedtest Skript
 
-Speedtest to tun0 and public VPN and generate a speedtest.net picture link
+Speedtest to tun0 (VPN) and public and generate a speedtest.net picture link
 
 vnStat is easy, as there are Debian packages 
 
