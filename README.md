@@ -668,6 +668,9 @@ with
 
     OPTIONS="-m none -u radvd -p $PIDFILE"
 
+You can restart it now.
+
+    service radvd restart
 
 ## Create-ramdisk:
 Edit the file /etc/fstab/
@@ -711,7 +714,7 @@ with
     
 You can restart it now.
 
-service radvd restart
+    service rsyslog restart
 
 
     from: https://www.open-mesh.org/projects/batman-adv/wiki/Gateways
