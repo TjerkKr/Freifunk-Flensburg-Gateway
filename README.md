@@ -231,10 +231,10 @@ Edit the file /etc/network/interfaces:
          post-up /usr/sbin/batctl it 10000
          post-up /usr/sbin/batctl gw_mode server      #Activate the gateway announcements on a node
          #post-up /usr/sbin/batctl gw_mode off        #Disabled the gateway announcements on a node
-         post-up /sbin/ip rule add from all fwmark 0x1 table 42
-         post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
-         post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
-         post-up /sbin/ip -6 route add fddf:bf7:10:1:1::[GWnumber]/64 dev br-fffl table 42
+         #post-up /sbin/ip rule add from all fwmark 0x1 table 42
+         #post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
+         #post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
+         #post-up /sbin/ip -6 route add fddf:bf7:10:1:1::[GWnumber]/64 dev br-fffl table 42
          pre-down /sbin/brctl delif br-fffl bat0 || true
          down /bin/ip link set dev bat0 down
 
