@@ -724,3 +724,7 @@ from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
 from: http://ffmwu-gateway-doku.readthedocs.io/de/latest/configuration/cleanup.html
 
 from: https://wiki.freifunk.net/Hamburg/Gateway#IPv4_DHCP_konfigurieren
+
+from: https://stackoverflow.com/questions/11482951/extracting-ip-address-from-a-line-from-ifconfig-output-with-grep
+
+from: Fabian Horst      https://github.com/Wlanfr3ak/auto-speedtest
