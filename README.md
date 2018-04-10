@@ -718,6 +718,9 @@ You can restart it now.
 
 
 from: https://www.open-mesh.org/projects/batman-adv/wiki/Gateways
+
 from: https://www.freemesh.ie/wiki/index.php/Generic_Freemesh_Gateway
+
 from: http://ffmwu-gateway-doku.readthedocs.io/de/latest/configuration/cleanup.html
+
 from: https://wiki.freifunk.net/Hamburg/Gateway#IPv4_DHCP_konfigurieren
