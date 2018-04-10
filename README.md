@@ -641,7 +641,7 @@ speedtest-cli is easy, as there are Debian packages
       echo
       
 
-      #Source: https://github.com/Wlanfr3ak/auto-speedtest
+      #Source: Fabian Horst      https://github.com/Wlanfr3ak/auto-speedtest
 
 make the script executable
 
