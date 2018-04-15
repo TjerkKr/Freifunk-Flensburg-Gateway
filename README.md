@@ -57,7 +57,7 @@ Also one little side note: This guide has IPv6 NAT configuration in it. I strong
 add jessie-backports to your /etc/apt/sources.list, then
 
     echo "deb https://repo.universe-factory.net/debian/ sid main" >>/etc/apt/sources.list
-    gpg --keyserver pgpkeys.mit.edu --recv-key  16EF3F64CB201D9C
+    gpg --keyserver pgpkeys.mit.edu --recv-key 16EF3F64CB201D9C
     gpg -a --export 16EF3F64CB201D9C | apt-key add -
 
     apt-get update
