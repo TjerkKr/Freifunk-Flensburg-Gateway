@@ -633,6 +633,17 @@ Create /etc/openvpn/airvpn.conf
     ping 10
     tun-ipv6
 
+## OpenVPN enabled Systemd
+
+cd /lib/systemd/system
+ln openvpn@.service openvpn@airvpn.service
+
+systemctl start openvpn@airvpn.service
+systemctl status openvpn@airvpn.service
+systemctl stop openvpn@airvpn.service
+systemctl enable openvpn@airvpn.service
+
+
 ## Speedtest Skript
 
 Speedtest to tun0 (VPN) and public and generate a speedtest.net picture link
