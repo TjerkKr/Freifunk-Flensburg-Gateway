@@ -625,6 +625,7 @@ systemctl status openvpn@airvpn.service
 systemctl stop openvpn@airvpn.service
 systemctl enable openvpn@airvpn.service
 
+Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
 
 ## Speedtest Skript
 
