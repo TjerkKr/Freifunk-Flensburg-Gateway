@@ -638,27 +638,28 @@ speedtest-cli is easy, as there are Debian packages
     
  Create /root/bin/speedtest.sh
  
-      #!/bin/sh
-      
-      TLD=fffl
+#!/bin/sh
+  
+TLD=fffl
 
-      #Source https://stackoverflow.com/questions/11482951/extracting-ip-address-from-a-line-from-ifconfig-output-with-grep
-      GWIP=$(ip -o -4 addr show dev br-$TLD | sed 's/.* inet \([^/]*\).*/\1/' &> /dev/null;)
 
-      echo
-      echo Speedtest via VPN
-      speedtest-cli --simple --server 4617 --source $GWIP --share #ADDIX Internet Services GmbH (Kiel)
-      ipvpn=$(wget http://checkip.dyndns.org --bind-address $GWIP -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>' &> /dev/null;)
-      echo ISP: $ipvpn
-      echo
-      echo Speedtest via Public
-      speedtest-cli --simple --server 4617 --share #ADDIX Internet Services GmbH (Kiel)
-      ippublic=$(wget http://checkip.dyndns.org -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>' &> /dev/null;)
-      echo ISP: $ippublic
-      echo
-      
+ipbr=$(ip addr show br-$TLD | grep -Po '(?!(inet 127.\d.\d.1))(inet \K(\d{1,3}\.){3}\d{1,3})')
+#Source https://stackoverflow.com/questions/11482951/extracting-ip-address-from-a-line-from-ifconfig-output-with-grep
 
-      #Source: Fabian Horst      https://github.com/Wlanfr3ak/auto-speedtest
+echo
+echo Speedtest via VPN
+speedtest-cli --simple --server 4617 --source $ipbr --share #ADDIX Internet Services GmbH (Kiel)
+ipvpn=$(wget http://checkip.dyndns.org --bind-address $ipbr -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>' &> /dev/null;)
+echo ISP: $ipvpn
+echo
+echo Speedtest via Public
+speedtest-cli --simple --server 4617 --share #ADDIX Internet Services GmbH (Kiel)
+ippublic=$(wget http://checkip.dyndns.org -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>' &> /dev/null;)
+echo ISP: $ippublic
+echo
+  
+#Source: Fabian Horst      https://github.com/Wlanfr3ak/auto-speedtest
+
 
 make the script executable
 
