@@ -27,58 +27,59 @@ Also one little side note: This guide has IPv6 NAT configuration in it. I strong
 * pick a secure root password.
 * create a regular user on the host, then limit Root from being able to log in via ssh
     
-       apt-get update
-       apt-get upgrade
+apt-get update
+apt-get upgrade
     
  2. Stuff that is needed
  
-        apt-get install screen htop iftop traceroute mtr-tiny mc openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https bind9 sudo git apt-transport-https vnstat
+apt-get install screen htop iftop traceroute mtr-tiny mc openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https bind9 sudo git apt-transport-https vnstat
 
 ## Debian 9 dirmngr error fix
-    apt remove gnupg
-    apt install --reinstall gnupg2
-    apt install dirmngr
+apt remove gnupg
+apt install --reinstall gnupg2
+apt install dirmngr
 
 # Install ifconfig Command
     
-    apt-get install net-tools
-    Source: https://linuxconfig.org/how-to-install-missing-ifconfig-command-on-debian-linux
+apt-get install net-tools
+Source: https://linuxconfig.org/how-to-install-missing-ifconfig-command-on-debian-linux
 
 ## B.A.T.M.A.N and fastd
 
 add jessie-backports to your /etc/apt/sources.list, then
 
-    echo "deb https://repo.universe-factory.net/debian/ sid main" >>/etc/apt/sources.list
-    gpg --keyserver pgpkeys.mit.edu --recv-key 16EF3F64CB201D9C
-    gpg -a --export 16EF3F64CB201D9C | apt-key add -
+echo "deb https://repo.universe-factory.net/debian/ sid main" >>/etc/apt/sources.list
+gpg --keyserver pgpkeys.mit.edu --recv-key 16EF3F64CB201D9C
+gpg -a --export 16EF3F64CB201D9C | apt-key add -
 
-    apt-get update
-    apt-get install batctl fastd bridge-utils
+apt-get update
+apt-get install batctl fastd bridge-utils
 
 ## downgrade to batman 14
-    modinfo batman-adv
-    apt-get install batman-adv-dkms
-    dkms remove batman-adv/2013.4.0 --all
-    dkms --force install batman-adv/2013.4.0
-    modprobe batman-adv # (if the wrong version is loaded "rmmod batman-adv" and then repeat the dkms commands)
-    dmesg or batctl -v or cat /sys/module/batman_adv/version # (check, to see, that you have the correct version loaded)
+    
+modinfo batman-adv
+apt-get install batman-adv-dkms
+dkms remove batman-adv/2013.4.0 --all
+dkms --force install batman-adv/2013.4.0
+modprobe batman-adv # (if the wrong version is loaded "rmmod batman-adv" and then repeat the dkms commands)
+dmesg or batctl -v or cat /sys/module/batman_adv/version # (check, to see, that you have the correct version loaded)
     
     
 ## This is needed for any version
 add batman-adv to your /etc/modules to autoload it on boot and activate it:
    
-     echo "batman-adv" >> /etc/modules
-     modprobe batman-adv
+echo "batman-adv" >> /etc/modules
+modprobe batman-adv
      
 ## Fastd
 create the directory for your fastd peers:
      
-     mkdir -p /etc/fastd/vpn/peers
+mkdir -p /etc/fastd/vpn/peers
      
 ## Generate key
 create the keys for fastd:
 
-    fastd --generate-key > /root/fastd-keys.pub.sec
+fastd --generate-key > /root/fastd-keys.pub.sec
     
 Backup the key pair `/root/fastd-keys.pub.sec` in a safe place. This will be needed both for the server and for the image builds.
 
@@ -86,77 +87,77 @@ create the .conf for fastd:
 
 nano /etc/fastd/vpn/fastd.conf
 
-    bind any:10006 interface "eth0";
-    method "salsa2012+umac";  	#
-    mtu 1406;			 # 1280 bytes for the client and 24 bytes for the batman unicast header
-    include "secret.conf";  	# include the secret.conf with your private secret key from the /root/fastd-keys.pub.sec 
-    include peers from "peers";     # your peerlist with the other gateways
-    on verify "true";		# this allows any unknown node to connect to your fastd
-    on up "
-      /sbin/ifup bat0
-      /bin/ip link set dev tap0 address 00:00:ff:f1:01:[GWnumber]
-      /bin/ip link set dev tap0 up
-    ";
+bind any:10006 interface "eth0";
+method "salsa2012+umac";  	#
+mtu 1406;			 # 1280 bytes for the client and 24 bytes for the batman unicast header
+include "secret.conf";  	# include the secret.conf with your private secret key from the /root/fastd-keys.pub.sec 
+include peers from "peers";     # your peerlist with the other gateways
+on verify "true";		# this allows any unknown node to connect to your fastd
+on up "
+/sbin/ifup bat0
+/bin/ip link set dev tap0 address 00:00:ff:f1:01:[GWnumber]
+/bin/ip link set dev tap0 up
+";
     
 insert your private secret key from the /root/fastd-keys.pub.sec in the secret.conf:
 
-    secret "$your_private_secret_key_from_the_/root/fastd-keys.pub.sec";
+secret "$your_private_secret_key_from_the_/root/fastd-keys.pub.sec";
     
 For the gateway to be able to connect to the other gateways and nodes known in the network, you need to get a bunch of files with the public keys for these. For Freifunk Nord for example, this looks like this: 
 
-    git clone https://github.com/freifunk-flensburg/fffl-fastd-peers /etc/fastd/vpn/peers
+git clone https://github.com/freifunk-flensburg/fffl-fastd-peers /etc/fastd/vpn/peers
     
 reload fastd without quitting: 
   
-    killall -HUP fastd
+killall -HUP fastd
     
 if it says "no process found", its because you just installed it and it doesn't run, so just start it: 
   
-    service fastd start
+service fastd start
     
 Regularly update the peers via cron.
 
-    #!/bin/sh
+#!/bin/sh
 
-    # hop into correct directory to avoid cron pwd sucks
-    cd $(dirname $0)
+# hop into correct directory to avoid cron pwd sucks
+cd $(dirname $0)
 
-    # function to get the current sha-1
-    getCurrentVersion() {
-    git log --format=format:%H -1
-    }
+# function to get the current sha-1
+getCurrentVersion() {
+git log --format=format:%H -1
+}
 
-    # get sha-1 before pull
-    revision_current=$(getCurrentVersion)
+# get sha-1 before pull
+revision_current=$(getCurrentVersion)
 
-    git pull -q
+git pull -q
 
-    # get sha-1 after pull
-    revision_new=$(getCurrentVersion)
+# get sha-1 after pull
+revision_new=$(getCurrentVersion)
 
-    # if sha-1 changed, make fastd reload the keys
-    if [ "$revision_current" != "$revision_new" ]
-    then
-    kill -HUP $(pidof fastd)
-    fi
+# if sha-1 changed, make fastd reload the keys
+if [ "$revision_current" != "$revision_new" ]
+then
+kill -HUP $(pidof fastd)
+fi
 
 make the script executable
 
-    chmod +x /etc/fastd/reloadPeers.sh
+chmod +x /etc/fastd/reloadPeers.sh
     
 and add these lines in cron with
 
-    sudo crontab -e
+sudo crontab -e
     
-    # Regularly update the fastd peers
-    */5 * * * * /etc/fastd/reloadPeers.sh
+# Regularly update the fastd peers
+*/5 * * * * /etc/fastd/reloadPeers.sh
     
     
 gateway status
 
 To see all available gateways and their announced throughput run:
 
-    batctl gwl
+batctl gwl
 
 
 ## Networking
