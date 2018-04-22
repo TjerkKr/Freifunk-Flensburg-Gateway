@@ -483,7 +483,7 @@ You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on w
 
 In the file add the following just above the <ca> section.
    
-Airvpn Config:
+Example Airvpn Config:
    
 Create /etc/openvpn/airvpn.conf
 
