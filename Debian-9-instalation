@@ -289,7 +289,7 @@ interface br-fffl {
     
    You can restart it now. 
 
-       service radvd restart
+service radvd restart
        
 
 ## DHCP isc-dhcp-server IPv4 and IPv6
@@ -298,33 +298,35 @@ The isc-dhcp-server can not provider IPv4 and IPv6 requests at the same time, so
 
 The configuration file /etc/dhcp/dhcpd.conf is needed for IPv4 in the freemesh/freifunk network. 
 
-    ddns-update-style none;
-    option domain-name ".fffl";
-    option domain-name-servers 10.129.1.[GWnumber]; # make sure to adjust to your gateway fm/ff ipv4
-    default-lease-time 300;
-    max-lease-time 3600;
-    log-facility local7;
-    subnet 10.129.0.0 netmask 255.255.0.0
-    {
-    authorative;
-    range 10.129.XX.XX 10.129.XX.254;    # make sure to adjust to your allocated fm/ff ipv4 range
-    option routers 10.129.1.[GWnumber];         # make sure to adjust to your gateway fm/ff ipv4
-    }
+ddns-update-style none;
+option domain-name ".fffl";
+option domain-name-servers 10.129.1.[GWnumber]; # make sure to adjust to your gateway fm/ff ipv4
+default-lease-time 300;
+max-lease-time 3600;
+log-facility local7;
+subnet 10.129.0.0 netmask 255.255.0.0
+{
+authorative;
+range 10.129.XX.XX 10.129.XX.254;# make sure to adjust to your allocated fm/ff ipv4 range
+option routers 10.129.1.[GWnumber]; # make sure to adjust to your gateway fm/ff ipv4
+}
 
-    include "/etc/dhcp/static.conf";
+include "/etc/dhcp/static.conf";
+
 
 Next create an empty static.conf file. 
 
     touch /etc/dhcp/static.conf
     
+    
 And create the configuration file /etc/dhcp/dhcpd6.conf for the IPv6 portion. 
     
-    log-facility local7;
+log-facility local7;
 
-    subnet6 fddf:bf7:10:1::/64 {  # for example: fdec:c0f1:afda::/64
-       option dhcp6.name-servers fddf:bf7:10:1:1::[GWnumber];  # make sure to adjust to your gateway fm/ff ipv6
-       option dhcp6.domain-search "fffl";
-    }
+subnet6 fddf:bf7:10:1::/64 {  # for example: fdec:c0f1:afda::/64
+option dhcp6.name-servers fddf:bf7:10:1:1::[GWnumber];  # make sure to adjust to your gateway fm/ff ipv6
+option dhcp6.domain-search "fffl";
+}
 
 
 Then edit the default start-up files for the ISC dhcpd.
