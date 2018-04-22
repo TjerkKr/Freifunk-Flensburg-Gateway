@@ -712,13 +712,13 @@ chmod +x /root/bin/speedtest.sh
 
 Edit the file nano /etc/fastd/vpn/fastd.conf
 
-    log level warn;
-    hide ip addresses yes;
-    hide mac addresses yes;
+log level warn;
+hide ip addresses yes;
+hide mac addresses yes;
     
 ## Disabled-radvd
 
-Edit the file /etc/fastd/vpn/fastd.conf
+Edit the file /etc/init.d/radvd
 
 Replace
 
@@ -774,7 +774,7 @@ with
     
 You can restart it now.
 
-    service rsyslog restart
+service rsyslog restart
 
 
 from: https://www.open-mesh.org/projects/batman-adv/wiki/Gateways
