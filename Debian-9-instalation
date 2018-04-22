@@ -153,14 +153,6 @@ sudo crontab -e
     
 # Regularly update the fastd peers
 */5 * * * * /etc/fastd/reloadPeers.sh
-    
-    
-gateway status
-
-To see all available gateways and their announced throughput run:
-
-batctl gwl
-
 
 ## Networking
 
@@ -242,13 +234,19 @@ Edit the file /etc/network/interfaces:
 
 restart the network, so debian apply the changes in the /etc/network/interfaces:
 
-    /etc/init.d/networking restart
-         
-         
-The mode of the current node can be seen by running:
+/etc/init.d/networking restart
 
-    batctl gw_mode
-      
+
+##The mode of the current node can be seen by running:
+
+batctl gw_mode
+
+
+##To see all available gateways and their announced throughput run:
+
+batctl gwl
+
+
 give the new IP4 and IPv6 to the bridge:
 
     ifconfig br-fffl 10.129.1.[GWnumber]
