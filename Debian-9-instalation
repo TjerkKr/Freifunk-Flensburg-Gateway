@@ -380,28 +380,28 @@ edit /etc/init.d/isc-dhcp6-server in 2 places.
 
 Replace
 
-    # Provides:          isc-dhcp-server
+# Provides:          isc-dhcp-server
     
 with
    
-    # Provides:          isc-dhcp6-server
+# Provides:          isc-dhcp6-server
 
 and replace
 
-    DHCPD_DEFAULT="${DHCPD_DEFAULT:-/etc/default/isc-dhcp-server}"
+DHCPD_DEFAULT="${DHCPD_DEFAULT:-/etc/default/isc-dhcp-server}"
     
 with
 
-    DHCPD_DEFAULT="${DHCPD_DEFAULT:-/etc/default/isc-dhcp6-server}"
+DHCPD_DEFAULT="${DHCPD_DEFAULT:-/etc/default/isc-dhcp6-server}"
     
 then install the init.d script for the IPv6 DHCPd 
 
-    update-rc.d isc-dhcp6-server defaults
+update-rc.d isc-dhcp6-server defaults
     
 and you can now restart the dhcpd services
 
-    service isc-dhcp-server restart
-    service isc-dhcp6-server restart  
+service isc-dhcp-server restart
+service isc-dhcp6-server restart  
 
 ## DNS bind9
 
@@ -411,39 +411,38 @@ Ask the VPN for the dns questestion and stop leak your public ipadress.
 
 Edit the file /etc/bind/named.conf.options
 
-    options {
-           directory "/var/cache/bind";
-           // Source: https://wiki.freifunk.net/Freifunk_Stormarn:Gateway
-           // If there is a firewall between you and nameservers you want
-           // to talk to, you may need to fix the firewall to allow multiple
-           // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
-           // If your ISP provided one or more IP addresses for stable
-           // nameservers, you probably want to use them as forwarders.
-           // Uncomment the following block, and insert the addresses replacing
-           // the all-0's placeholder.
-           forwarders {
-                 10.4.0.1;
-                 10.5.0.1;
-                 10.6.0.1;
-                 10.7.0.1;
-                 10.8.0.1;
-                 10.9.0.1;
-                 10.30.0.1;
-                 10.50.0.1;
-           };
-           //========================================================================
-           // If BIND logs error messages about the root key being expired,
-           // you will need to update your keys.  See https://www.isc.org/bind-keys
-           //========================================================================
-          // dnssec-enable yes;
-          // dnssec-validation yes;
-           dnssec-validation no;
-          // dnssec-lookaside auto;
-          // recursion yes;
-          // allow-recursion { localnets; localhost; };
-          auth-nxdomain no;    # conform to RFC1035
-          listen-on-v6 { any; };
+  options {
+       directory "/var/cache/bind";
+       // If there is a firewall between you and nameservers you want
+       // to talk to, you may need to fix the firewall to allow multiple
+       // ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+       // If your ISP provided one or more IP addresses for stable
+       // nameservers, you probably want to use them as forwarders.
+       // Uncomment the following block, and insert the addresses replacing
+       // the all-0's placeholder.
+       forwarders {
+               10.4.0.1;
+               10.5.0.1;
+               10.6.0.1;
+               10.7.0.1;
+               10.8.0.1;
+               10.9.0.1;
+               10.30.0.1;
+               10.50.0.1;
        };
+       //========================================================================
+       // If BIND logs error messages about the root key being expired,
+       // you will need to update your keys.  See https://www.isc.org/bind-keys
+       //========================================================================
+      // dnssec-enable yes;
+      // dnssec-validation yes;
+       dnssec-validation no;
+      // dnssec-lookaside auto;
+      // recursion yes;
+      // allow-recursion { localnets; localhost; };
+      auth-nxdomain no;    # conform to RFC1035
+      listen-on-v6 { any; };
+   };
 
 ## VPN
 
@@ -451,171 +450,172 @@ This example assumes Airvpn, but can be used with any other service.
 
 First create /root/bin
 
-  mkdir /root/bin
+mkdir /root/bin
   
   Then create a script for, that is executed, after the VPN has come up in /root/bin/vpn.up and make it executable.
   
-      #!/bin/sh
-      /sbin/ip route del default table 42
-      /sbin/ip -6 route del default table 42
-      /sbin/ip route add default dev tun0 table 42
-      /sbin/ip -6 route add default dev tun0 table 42
+#!/bin/sh
+/sbin/ip route del default table 42
+/sbin/ip -6 route del default table 42
+/sbin/ip route add default dev tun0 table 42
+/sbin/ip -6 route add default dev tun0 table 42
      
 make the script executable
 
-    chmod +x /root/bin/vpn.up
+chmod +x /root/bin/vpn.up
 
 
 
   Then create a script for, that is executed, after the VPN has come down in /root/bin/vpn.down and make it executable.
 
-      #!/bin/sh
-      /sbin/ip route del default table 42
-      /sbin/ip -6 route del default table 42
-      /sbin/ip route add default dev tun0 table 42
-      /sbin/ip -6 route add default dev tun0 table 42
+#!/bin/sh
+/sbin/ip route del default table 42
+/sbin/ip -6 route del default table 42
+/sbin/ip route add default dev tun0 table 42
+/sbin/ip -6 route add default dev tun0 table 42
       
 make the script executable
 
-    chmod +x /root/bin/vpn.down
+chmod +x /root/bin/vpn.down
 
       
- You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on what you want) from Mullvad. You'll find that in Download - iOS, Android and other platforms - Instructions and configuration files. Select your configuration and servers, then get the config. Place the file in /etc/openvpn and rename it to *.conf, as openvpn won't pick it up otherwise.
+You also need to retrieve the mullvad_de.ovpn or mullvad_dk.ovpn (depending on what you want) from Mullvad. You'll find that in Download - iOS, Android and other platforms - Instructions and configuration files. Select your configuration and servers, then get the config. Place the file in /etc/openvpn and rename it to *.conf, as openvpn won't pick it up otherwise.
 
 In the file add the following just above the <ca> section.
    
-   Airvpn Config:
+Airvpn Config:
    
 Create /etc/openvpn/airvpn.conf
 
-    client
-    dev tun
-    proto udp
-    port 443
+client
+dev tun
+proto udp
+port 443
 
-    ###########################Netherland##############################
-    remote 213.152.162.93  #NL-Alblasserdam-Gienah
-    remote 213.152.162.153 #NL-Alblasserdam-Muscida
-    remote 213.152.161.180 #NL-Alblasserdam_Alchiba
-    remote 213.152.161.116 #NL-Alblasserdam_Alcyone
-    remote 109.202.107.9   #NL-Alblasserdam_Alphard
-    remote 109.202.107.4   #NL-Alblasserdam_Alphecca
-    remote 109.202.107.146 #NL-Alblasserdam_Alphirk
-    remote 213.152.162.78  #NL-Alblasserdam_Alrai
-    remote 213.152.161.4   #NL-Alblasserdam_Alshat
-    remote 213.152.161.16  #NL-Alblasserdam_Alterf
-    remote 109.202.107.14  #NL-Alblasserdam_Alzirr
-    remote 213.152.162.164 #NL-Alblasserdam_Ancha
-    remote 213.152.161.228 #NL-Alblasserdam_Andromeda
-    remote 109.202.103.169 #NL-Alblasserdam_Anser
-    remote 109.202.107.19  #NL-Alblasserdam_Asellus
-    remote 213.152.161.9   #NL-Alblasserdam_Atik
-    remote 213.152.161.218 #NL-Alblasserdam_Canis
-    remote 213.152.162.169 #NL-Alblasserdam_Caph
-    remote 213.152.161.68  #NL-Alblasserdam_Celaeno
-    remote 109.232.227.132 #NL-Alblasserdam_Chara
-    remote 213.152.162.14  #NL-Alblasserdam_Crater
-    remote 213.152.161.243 #NL-Alblasserdam_Cygnus
-    remote 213.152.161.164 #NL-Alblasserdam_Diphda
-    remote 213.152.161.210 #NL-Alblasserdam_Edasich
-    remote 213.152.180.4   #NL-Alblasserdam_Elnath
-    remote 213.152.162.73  #NL-Alblasserdam_Garnet
-    remote 213.152.161.100 #NL-Alblasserdam_Gianfar
-    remote 213.152.162.93  #NL-Alblasserdam_Gienah
-    remote 213.152.161.39  #NL-Alblasserdam_Hassaleh
-    remote 213.152.162.4   #NL-Alblasserdam_Horologium
-    remote 213.152.161.34  #NL-Alblasserdam_Hyadum
-    remote 213.152.162.9   #NL-Alblasserdam_Hydrus
-    remote 213.152.162.108 #NL-Alblasserdam_Jabbah
-    remote 213.152.161.84  #NL-Alblasserdam_Kajam
-    remote 213.152.162.180 #NL-Alblasserdam_Kocab
-    remote 213.152.162.103 #NL-Alblasserdam_Maasym
-    remote 109.232.227.137 #NL-Alblasserdam_Matar
-    remote 213.152.161.29  #NL-Alblasserdam_Merga
-    remote 213.152.162.68  #NL-Alblasserdam_Mirach
-    remote 213.152.162.88  #NL-Alblasserdam_Miram
-    remote 213.152.162.153 #NL-Alblasserdam_Muscida
-    remote 213.152.161.248 #NL-Alblasserdam_Musica
-    remote 213.152.161.24  #NL-Alblasserdam_Nash
-    remote 213.152.161.238 #NL-Alblasserdam_Orion
-    remote 109.232.227.148 #NL-Alblasserdam_Phaet
-    remote 213.152.162.148 #NL-Alblasserdam_Pleione
-    remote 213.152.161.233 #NL-Alblasserdam_Pyxis
-    remote 213.152.162.83  #NL-Alblasserdam_Rukbat
-    remote 213.152.161.19  #NL-Alblasserdam_Salm
-    remote 213.152.162.113 #NL-Alblasserdam_Sheliak
-    remote 213.152.161.14  #NL-Alblasserdam_Situla
-    remote 213.152.161.73  #NL-Alblasserdam_Skat
-    remote 213.152.162.98  #NL-Alblasserdam_Subra
-    remote 213.152.161.137 #NL-Alblasserdam_Talitha
-    remote 213.152.161.132 #NL-Alblasserdam_Tarazed
-    remote 213.152.161.148 #NL-Alblasserdam_Zibal
-    ##############################Germany##############################
-    remote 185.189.112.10  #DE-Frankfurt_Errai
-    remote de.vpn.airdns.org  #DE-Frankfurt
-    remote 185.104.184.42  #DE-Frankfurt_Adhara
-    remote 185.189.112.26  #DE-Frankfurt_Cervantes
-    remote 185.189.112.18  #DE-Frankfurt_Ogma
-    ##############################Germany##############################
-    remote 79.143.176.194  #DE-Munich_Lepus
-    remote 80.241.210.238  #DE-Munich_Libertas
-    remote 79.143.191.166  #DE-Munich_Mesarthim
-    remote 79.143.186.171  #DE-Munich_Perseus
-    #############################Schweden##############################
-    remote 62.102.148.136  #SE-Uppsala_Zaniah
-    remote 62.102.148.139  #SE-Uppsala_Serpentis
-    remote 62.102.148.134  #SE-Uppsala_Pherkad
-    remote 62.102.148.146  #SE-Uppsala_Muphrid
-    remote 62.102.148.143  #SE-Uppsala_Menkab
-    remote 62.102.148.144  #SE-Uppsala_Hatysa
-    remote 62.102.148.132  SE-Uppsala_Gomeisa
-    remote 62.102.148.137  #SE-Uppsala_Gacrux
-    remote 62.102.148.148  #SE-Uppsala_Benetnasch
-    remote 62.102.148.141  #SE-Uppsala_Azmidiske
-    remote 62.102.148.150  #SE-Uppsala_Atria
-    remote 62.102.148.151  #SE-Uppsala_Alula
-    remote 62.102.148.140  #SE-Uppsala_Altarf
-    remote 62.102.148.145  #SE-Uppsala_Alrami
-    remote 62.102.148.147  #SE-Uppsala_Algorab
-    remote 62.102.148.142  #SE-Uppsala_Algieba
-    remote 62.102.148.149  #SE-Uppsala_Albali
-    remote 31.3.152.99  #SE-Stockholm_Norma
-    ###############################################################
-    resolv-retry infinite
-    remote-cert-tls server
-    cipher AES-256-CBC
-    comp-lzo no
-    verb 3
-    explicit-exit-notify 5
-    rcvbuf 262144
-    sndbuf 262144
+###########################Netherland##############################
+remote 213.152.162.93  #NL-Alblasserdam-Gienah
+remote 213.152.162.153 #NL-Alblasserdam-Muscida
+remote 213.152.161.180 #NL-Alblasserdam_Alchiba
+remote 213.152.161.116 #NL-Alblasserdam_Alcyone
+remote 109.202.107.9   #NL-Alblasserdam_Alphard
+remote 109.202.107.4   #NL-Alblasserdam_Alphecca
+remote 109.202.107.146 #NL-Alblasserdam_Alphirk
+remote 213.152.162.78  #NL-Alblasserdam_Alrai
+remote 213.152.161.4   #NL-Alblasserdam_Alshat
+remote 213.152.161.16  #NL-Alblasserdam_Alterf
+remote 109.202.107.14  #NL-Alblasserdam_Alzirr
+remote 213.152.162.164 #NL-Alblasserdam_Ancha
+remote 213.152.161.228 #NL-Alblasserdam_Andromeda
+remote 109.202.103.169 #NL-Alblasserdam_Anser
+remote 109.202.107.19  #NL-Alblasserdam_Asellus
+remote 213.152.161.9   #NL-Alblasserdam_Atik
+remote 213.152.161.218 #NL-Alblasserdam_Canis
+remote 213.152.162.169 #NL-Alblasserdam_Caph
+remote 213.152.161.68  #NL-Alblasserdam_Celaeno
+remote 109.232.227.132 #NL-Alblasserdam_Chara
+remote 213.152.162.14  #NL-Alblasserdam_Crater
+remote 213.152.161.243 #NL-Alblasserdam_Cygnus
+remote 213.152.161.164 #NL-Alblasserdam_Diphda
+remote 213.152.161.210 #NL-Alblasserdam_Edasich
+remote 213.152.180.4   #NL-Alblasserdam_Elnath
+remote 213.152.162.73  #NL-Alblasserdam_Garnet
+remote 213.152.161.100 #NL-Alblasserdam_Gianfar
+remote 213.152.162.93  #NL-Alblasserdam_Gienah
+remote 213.152.161.39  #NL-Alblasserdam_Hassaleh
+remote 213.152.162.4   #NL-Alblasserdam_Horologium
+remote 213.152.161.34  #NL-Alblasserdam_Hyadum
+remote 213.152.162.9   #NL-Alblasserdam_Hydrus
+remote 213.152.162.108 #NL-Alblasserdam_Jabbah
+remote 213.152.161.84  #NL-Alblasserdam_Kajam
+remote 213.152.162.180 #NL-Alblasserdam_Kocab
+remote 213.152.162.103 #NL-Alblasserdam_Maasym
+remote 109.232.227.137 #NL-Alblasserdam_Matar
+remote 213.152.161.29  #NL-Alblasserdam_Merga
+remote 213.152.162.68  #NL-Alblasserdam_Mirach
+remote 213.152.162.88  #NL-Alblasserdam_Miram
+remote 213.152.162.153 #NL-Alblasserdam_Muscida
+remote 213.152.161.248 #NL-Alblasserdam_Musica
+remote 213.152.161.24  #NL-Alblasserdam_Nash
+remote 213.152.161.238 #NL-Alblasserdam_Orion
+remote 109.232.227.148 #NL-Alblasserdam_Phaet
+remote 213.152.162.148 #NL-Alblasserdam_Pleione
+remote 213.152.161.233 #NL-Alblasserdam_Pyxis
+remote 213.152.162.83  #NL-Alblasserdam_Rukbat
+remote 213.152.161.19  #NL-Alblasserdam_Salm
+remote 213.152.162.113 #NL-Alblasserdam_Sheliak
+remote 213.152.161.14  #NL-Alblasserdam_Situla
+remote 213.152.161.73  #NL-Alblasserdam_Skat
+remote 213.152.162.98  #NL-Alblasserdam_Subra
+remote 213.152.161.137 #NL-Alblasserdam_Talitha
+remote 213.152.161.132 #NL-Alblasserdam_Tarazed
+remote 213.152.161.148 #NL-Alblasserdam_Zibal
+##############################Germany##############################
+remote 185.189.112.10  #DE-Frankfurt_Errai
+remote de.vpn.airdns.org  #DE-Frankfurt
+remote 185.104.184.42  #DE-Frankfurt_Adhara
+remote 185.189.112.26  #DE-Frankfurt_Cervantes
+remote 185.189.112.18  #DE-Frankfurt_Ogma
+##############################Germany##############################
+remote 79.143.176.194  #DE-Munich_Lepus
+remote 80.241.210.238  #DE-Munich_Libertas
+remote 79.143.191.166  #DE-Munich_Mesarthim
+remote 79.143.186.171  #DE-Munich_Perseus
+#############################Schweden##############################
+remote 62.102.148.136  #SE-Uppsala_Zaniah
+remote 62.102.148.139  #SE-Uppsala_Serpentis
+remote 62.102.148.134  #SE-Uppsala_Pherkad
+remote 62.102.148.146  #SE-Uppsala_Muphrid
+remote 62.102.148.143  #SE-Uppsala_Menkab
+remote 62.102.148.144  #SE-Uppsala_Hatysa
+remote 62.102.148.132  SE-Uppsala_Gomeisa
+remote 62.102.148.137  #SE-Uppsala_Gacrux
+remote 62.102.148.148  #SE-Uppsala_Benetnasch
+remote 62.102.148.141  #SE-Uppsala_Azmidiske
+remote 62.102.148.150  #SE-Uppsala_Atria
+remote 62.102.148.151  #SE-Uppsala_Alula
+remote 62.102.148.140  #SE-Uppsala_Altarf
+remote 62.102.148.145  #SE-Uppsala_Alrami
+remote 62.102.148.147  #SE-Uppsala_Algorab
+remote 62.102.148.142  #SE-Uppsala_Algieba
+remote 62.102.148.149  #SE-Uppsala_Albali
+remote 31.3.152.99  #SE-Stockholm_Norma
+###############################################################
+resolv-retry infinite
+remote-cert-tls server
+cipher AES-256-CBC
+comp-lzo no
+verb 3
+explicit-exit-notify 5
+rcvbuf 262144
+sndbuf 262144
 
-    #Connect to random server
-    remote-random
-    
-    #restart after n seconds pass without reception of a ping or other packet from remote. 
-    ping-restart 20
-    
-    # Most clients don't need to bind to
-    # a specific local port number.
-    nobind
+#Connect to random server
+remote-random
 
-    # Try to preserve some state across restarts.
-    persist-key
-    persist-tun
+#restart after n seconds pass without reception of a ping or other packet from remote. 
+ping-restart 20
 
-    #Disabled Logging
-    log /dev/null
-    status /dev/null
+# Most clients don't need to bind to
+# a specific local port number.
+nobind
 
-    #############################
-    script-security 2
-    route-noexec
-    up /root/bin/vpn.up
-    down /root/bin/vpn.down
-    #############################
-    ping 10
-    tun-ipv6
+# Try to preserve some state across restarts.
+persist-key
+persist-tun
+
+#Disabled Logging
+log /dev/null
+status /dev/null
+
+#############################
+script-security 2
+route-noexec
+up /root/bin/vpn.up
+down /root/bin/vpn.down
+#############################
+ping 10
+tun-ipv6
+
 
 ## OpenVPN enabled Systemd
 
@@ -635,7 +635,7 @@ Speedtest to tun0 (VPN) and public and generate a speedtest.net picture link
 
 speedtest-cli is easy, as there are Debian packages 
 
-    apt-get install speedtest-cli
+apt-get install speedtest-cli
     
  Create /root/bin/speedtest.sh
  
@@ -664,7 +664,7 @@ echo
 
 make the script executable
 
-    chmod +x /root/bin/speedtest.sh
+chmod +x /root/bin/speedtest.sh
     
     
 ## Disabled-fastd-logging
@@ -681,37 +681,37 @@ Edit the file /etc/fastd/vpn/fastd.conf
 
 Replace
 
-    DOPTIONS="-u radvd -p $PIDFILE"
+DOPTIONS="-u radvd -p $PIDFILE"
     
 with
 
-    OPTIONS="-m none -u radvd -p $PIDFILE"
+OPTIONS="-m none -u radvd -p $PIDFILE"
 
 You can restart it now.
 
-    service radvd restart
+service radvd restart
 
 ## Create-ramdisk:
 Edit the file /etc/fstab/
 
-    tmpfs     /tmp           tmpfs     size=100M      0      0
-    tmpfs     /var/tmp       tmpfs     size=100M      0      0
-    tmpfs     /var/log       tmpfs     size=100M     0      0
-    tmpfs     /var/lock      tmpfs     size=100M     0      0
+tmpfs     /tmp           tmpfs     size=100M      0      0
+tmpfs     /var/tmp       tmpfs     size=100M      0      0
+tmpfs     /var/log       tmpfs     size=100M     0      0
+tmpfs     /var/lock      tmpfs     size=100M     0      0
     
     
  ## Disabled-Logging DNS
 
 Edit the file /etc/bind/named.conf.logging
 
-    logging {
-    channel null { null; };
-    category default { null; };
-    };
+logging {
+channel null { null; };
+category default { null; };
+};
     
 Edit the file /etc/bind/named.conf
     
-    include "/etc/bind/named.conf.logging";
+include "/etc/bind/named.conf.logging";
     
 Edit /etc/rsyslog.conf in 2 places.
 
