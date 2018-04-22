@@ -19,10 +19,10 @@ Also one little side note: This guide has IPv6 NAT configuration in it. I strong
 ## Installation
 1. Install a minimal Debian jessie
 
-       make sure to set the hostname and domainname:
-       hostname $FREEMESH_HOSTNAME
-       echo "127.0.0.1 $FREEMESH_DOMAIN_NAME $FREEMESH_HOSTNAME" >>/etc/hosts
-       echo $FREEMESH_HOSTNAME > /etc/hostname
+make sure to set the hostname and domainname:
+hostname $FREEMESH_HOSTNAME
+echo "127.0.0.1 $FREEMESH_DOMAIN_NAME $FREEMESH_HOSTNAME" >>/etc/hosts
+echo $FREEMESH_HOSTNAME > /etc/hostname
 
 * pick a secure root password.
 * create a regular user on the host, then limit Root from being able to log in via ssh
@@ -156,80 +156,80 @@ sudo crontab -e
 
 ## Networking
 
-    Edit the file /etc/sysctl.conf and find the section
+Edit the file /etc/sysctl.conf and find the section
 
-    # Uncomment the next line to enable packet forwarding for IPv4
-    net.ipv4.ip_forward=1
+# Uncomment the next line to enable packet forwarding for IPv4
+net.ipv4.ip_forward=1
 
-    # Uncomment the next line to enable packet forwarding for IPv6
-    #  Enabling this option disables Stateless Address Autoconfiguration
-    #  based on Router Advertisements for this host
-    net.ipv6.conf.all.forwarding=1
+# Uncomment the next line to enable packet forwarding for IPv6
+#  Enabling this option disables Stateless Address Autoconfiguration
+#  based on Router Advertisements for this host
+net.ipv6.conf.all.forwarding=1
 
 The two forwarding rules will be commented out, so you need to remove the # in front of them
 
 Edit the file /etc/network/interfaces:
 
-      # This file describes the network interfaces available on your system
-      # and how to activate them. For more information, see interfaces(5).
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
 
-      source /etc/network/interfaces.d/*
+source /etc/network/interfaces.d/*
 
-      # The loopback network interface
-      auto lo
-      iface lo inet loopback
+# The loopback network interface
+auto lo
+iface lo inet loopback
 
-      # The primary network interface
-      auto eth0
-      allow-hotplug eth0
+# The primary network interface
+auto eth0
+allow-hotplug eth0
 
-      iface eth0 inet dhcp
+iface eth0 inet dhcp
 
-      # Batman
-          auto br-fffl
-          allow-hotplug bat0
+# Batman
+    auto br-fffl
+    allow-hotplug bat0
 
-      iface eth0 inet6 static
-          address [your public ipv6]  # don't change
-          netmask [your public ipv6 netmask]  # don't change
-          gateway [your public ipv6 gateway]  # don't change
+iface eth0 inet6 static
+    address [your public ipv6]  # don't change
+    netmask [your public ipv6 netmask]  # don't change
+    gateway [your public ipv6 gateway]  # don't change
 
-      #  HOSTER: Everything above this line is the config from your hoster
-      # <----------------------------------------------------------------------
-      #  FREEMESH: Everything after this line is the config for your community
+#  HOSTER: Everything above this line is the config from your hoster
+# <----------------------------------------------------------------------
+#  FREEMESH: Everything after this line is the config for your community
 
-      # Batman
-          up /sbin/brctl addbr br-fffl
+# Batman
+    up /sbin/brctl addbr br-fffl
 
-      iface br-fffl inet static
-          address 10.129.1.[GWnumber]
-          netmask 255.255.0.0
-          bridge-ports none
+iface br-fffl inet static
+    address 10.129.1.[GWnumber]
+    netmask 255.255.0.0
+    bridge-ports none
 
-      iface br-fffl inet6 static
-          address fddf:bf7:10:1:1::[GWnumber]
-          netmask 64
+iface br-fffl inet6 static
+    address fddf:bf7:10:1:1::[GWnumber]
+    netmask 64
 
-      # batman interface
-      iface bat0 inet6 manual
-         pre-up /usr/sbin/batctl if add tap0
-         up /bin/ip link set dev bat0 up
-         post-up /sbin/brctl addif br-fffl bat0
-         post-up /usr/sbin/batctl it 10000
-         post-up /usr/sbin/batctl gw_mode server      #Activate the gateway announcements on a node
-         #post-up /usr/sbin/batctl gw_mode off        #Disabled the gateway announcements on a node
-         #post-up /sbin/ip rule add from all fwmark 0x1 table 42
-         #post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
-         #post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
-         #post-up /sbin/ip -6 route add fddf:bf7:10:1:1::[GWnumber]/64 dev br-fffl table 42
-         pre-down /sbin/brctl delif br-fffl bat0 || true
-         down /bin/ip link set dev bat0 down
+# batman interface
+iface bat0 inet6 manual
+   pre-up /usr/sbin/batctl if add tap0
+   up /bin/ip link set dev bat0 up
+   post-up /sbin/brctl addif br-fffl bat0
+   post-up /usr/sbin/batctl it 10000
+   post-up /usr/sbin/batctl gw_mode server#Activate the gateway announcements on a node
+   #post-up /usr/sbin/batctl gw_mode off  #Disabled the gateway announcements on a node
+   #post-up /sbin/ip rule add from all fwmark 0x1 table 42
+   #post-up /sbin/ip route add 10.129.0.0/16 dev br-fffl table 42
+   #post-up /sbin/ip -6 rule add from all fwmark 0x1 table 42
+   #post-up /sbin/ip -6 route add fddf:bf7:10:1:1::[GWnumber]/64 dev br-fffl table 42
+   pre-down /sbin/brctl delif br-fffl bat0 || true
+   down /bin/ip link set dev bat0 down
 
-         # this is for adding the gateway to the map later, not necessarily necessary.
-         # post-up start-stop-daemon -b --start --exec /usr/local/sbin/alfred -- -i br-$FREEMESH_TLD -b bat0 -m
-         # post-up start-stop-daemon -b --start --exec /usr/local/sbin/batadv-vis -- -i bat0 -s
+   # this is for adding the gateway to the map later, not necessarily necessary.
+   # post-up start-stop-daemon -b --start --exec /usr/local/sbin/alfred -- -i br-$FREEMESH_TLD -b bat0 -m
+   # post-up start-stop-daemon -b --start --exec /usr/local/sbin/batadv-vis -- -i bat0 -s
 
-      source /etc/network/interfaces.d/*
+source /etc/network/interfaces.d/*
 
 
 restart the network, so debian apply the changes in the /etc/network/interfaces:
