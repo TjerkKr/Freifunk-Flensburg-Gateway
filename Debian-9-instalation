@@ -644,6 +644,29 @@ systemctl status openvpn@mullvad.service
 systemctl stop openvpn@mullvad.service
 systemctl enable openvpn@mullvad.service
 
+rename mullvad*.conf to mullvad.conf
+
+mv mullvad*.conf to mullvad.conf
+
+Edit /etc/openvpn/mullvad.conf and add:
+
+#Connect to random server
+remote-random
+
+#restart after n seconds pass without reception of a ping or other packe$
+ping-restart 10
+ping 10
+
+#Disabled Logging
+log /dev/null
+status /dev/null
+
+#############################
+script-security 2
+route-noexec
+up /root/bin/vpn.up
+down /root/bin/vpn.down
+#############################
 
 Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
 
