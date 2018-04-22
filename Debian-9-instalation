@@ -683,6 +683,10 @@ systemctl enable openvpn@airvpn.service
 
 Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
 
+Test the VPN Connection:
+
+ping -I tun0 oogle.de
+
 
 ##Example Mullvad VPN Config:
    
@@ -768,6 +772,10 @@ systemctl enable openvpn@mullvad.service
 
 Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
 
+
+Test the VPN Connection:
+
+ping -I tun0 oogle.de
 
 
 ## Speedtest Skript
