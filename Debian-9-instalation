@@ -637,7 +637,7 @@ https://wiki.freifunk-franken.de/w/Freifunk-Gateway_aufsetzen
 
 ## OpenVPN enabled Systemd
 cd /lib/systemd/system
-ln openvpn@.service openvpn@airvpn.service
+ln openvpn@.service openvpn@mullvad.service
 
 systemctl start openvpn@mullvad.service
 systemctl status openvpn@mullvad.service
