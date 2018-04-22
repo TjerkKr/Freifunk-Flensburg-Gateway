@@ -625,6 +625,8 @@ systemctl status openvpn@airvpn.service
 systemctl stop openvpn@airvpn.service
 systemctl enable openvpn@airvpn.service
 
+Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
+
 
 ##Example Mullvad VPN Config:
    
@@ -635,6 +637,70 @@ cd <Kundennummernverzeichnis>
 cp * /etc/openvpn 
 https://wiki.freifunk-franken.de/w/Freifunk-Gateway_aufsetzen
 
+rename mullvad*.conf to mullvad.conf
+
+mv mullvad*.conf to mullvad.conf
+
+Edit /etc/openvpn/mullvad.conf and add:
+
+
+client
+dev tun
+proto udp
+
+remote de.mullvad.net 1195
+remote de-ber.mullvad.net 1197
+remote de-fra.mullvad.net 1195
+#remote nl.mullvad.net 1197
+#remote se.mullvad.net 1301
+#remote se-hel.mullvad.net 1197
+#remote se-mma.mullvad.net 1195
+#remote se-sto.mullvad.net 1302
+
+cipher AES-256-CBC
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+comp-lzo
+verb 3
+remote-cert-tls server
+
+#Connect to random server
+remote-random
+
+#restart after n seconds pass without reception of a ping or other packe$
+ping-restart 10
+ping 10
+
+# Most clients don't need to bind to
+# a specific local port number.
+nobind
+
+# Try to preserve some state across restarts.
+persist-key
+persist-tun
+
+#Disabled Logging
+log /dev/null
+status /dev/null
+
+auth-user-pass mullvad_userpass.txt
+
+ca mullvad_ca.crt
+crl-verify mullvad_crl.pem
+
+tls-cipher TLS-DHE-RSA-WITH-AES-256-GCM-SHA384:TLS-DHE-RSA-WITH-AES-256-$
+
+#############################
+script-security 2
+route-noexec
+up /root/bin/vpn.up
+down /root/bin/vpn.down
+#############################
+
+
+
 ## OpenVPN enabled Systemd
 cd /lib/systemd/system
 ln openvpn@.service openvpn@mullvad.service
@@ -644,31 +710,9 @@ systemctl status openvpn@mullvad.service
 systemctl stop openvpn@mullvad.service
 systemctl enable openvpn@mullvad.service
 
-rename mullvad*.conf to mullvad.conf
-
-mv mullvad*.conf to mullvad.conf
-
-Edit /etc/openvpn/mullvad.conf and add:
-
-#Connect to random server
-remote-random
-
-#restart after n seconds pass without reception of a ping or other packe$
-ping-restart 10
-ping 10
-
-#Disabled Logging
-log /dev/null
-status /dev/null
-
-#############################
-script-security 2
-route-noexec
-up /root/bin/vpn.up
-down /root/bin/vpn.down
-#############################
-
 Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
+
+
 
 ## Speedtest Skript
 
@@ -716,7 +760,7 @@ log level warn;
 hide ip addresses yes;
 hide mac addresses yes;
     
-## Disabled-radvd
+## Disabled-radvd-Loggin
 
 Edit the file /etc/init.d/radvd
 
@@ -732,16 +776,9 @@ You can restart it now.
 
 service radvd restart
 
-## Create-ramdisk:
-Edit the file /etc/fstab/
 
-tmpfs     /tmp           tmpfs     size=100M      0      0
-tmpfs     /var/tmp       tmpfs     size=100M      0      0
-tmpfs     /var/log       tmpfs     size=100M     0      0
-tmpfs     /var/lock      tmpfs     size=100M     0      0
-    
-    
- ## Disabled-Logging DNS
+
+## Disabled-Logging DNS
 
 Edit the file /etc/bind/named.conf.logging
 
@@ -775,6 +812,16 @@ with
 You can restart it now.
 
 service rsyslog restart
+
+
+
+## Create-ramdisk:
+Edit the file /etc/fstab/
+
+tmpfs     /tmp           tmpfs     size=100M      0      0
+tmpfs     /var/tmp       tmpfs     size=100M      0      0
+tmpfs     /var/log       tmpfs     size=100M     0      0
+tmpfs     /var/lock      tmpfs     size=100M     0      0
 
 
 from: https://www.open-mesh.org/projects/batman-adv/wiki/Gateways
