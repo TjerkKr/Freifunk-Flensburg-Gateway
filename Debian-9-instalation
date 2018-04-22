@@ -24,6 +24,61 @@ hostname $FREEMESH_HOSTNAME
 echo "127.0.0.1 $FREEMESH_DOMAIN_NAME $FREEMESH_HOSTNAME" >>/etc/hosts
 echo $FREEMESH_HOSTNAME > /etc/hostname
 
+useradd -m -G sudo username
+passwd username
+
+mkdir /home/username/.ssh
+
+vi /home/username/.ssh/authorized_keys
+
+chown username:*username /home/username/.ssh -R
+
+
+nano vi /etc/ssh/sshd_config 
+
+
+Replace
+
+PermitRootLogin yes
+
+with
+
+PermitRootLogin no
+
+
+and replace
+
+#PasswordAuthentication yes
+
+with
+
+PasswordAuthentication no
+
+
+and replace
+
+#PubkeyAuthentication yes
+
+with
+
+PubkeyAuthentication yes
+
+
+and replace
+
+UsePAM yes
+
+with
+
+UsePAM no
+
+
+
+service ssh restart
+
+
+
+
 * pick a secure root password.
 * create a regular user on the host, then limit Root from being able to log in via ssh
     
