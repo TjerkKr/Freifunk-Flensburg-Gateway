@@ -616,9 +616,7 @@ down /root/bin/vpn.down
 ping 10
 tun-ipv6
 
-
 ## OpenVPN enabled Systemd
-
 cd /lib/systemd/system
 ln openvpn@.service openvpn@airvpn.service
 
@@ -626,6 +624,26 @@ systemctl start openvpn@airvpn.service
 systemctl status openvpn@airvpn.service
 systemctl stop openvpn@airvpn.service
 systemctl enable openvpn@airvpn.service
+
+
+##Example Mullvad VPN Config:
+   
+Create a Mullvad a count and go https://mullvad.net/download/config/ generate your config file.
+scp mullvadconfig.zip root@<ipv4 des Gateways>:/root
+ssh root@<ipv4 Gateways> 
+cd <Kundennummernverzeichnis>
+cp * /etc/openvpn 
+https://wiki.freifunk-franken.de/w/Freifunk-Gateway_aufsetzen
+
+## OpenVPN enabled Systemd
+cd /lib/systemd/system
+ln openvpn@.service openvpn@airvpn.service
+
+systemctl start openvpn@mullvad.service
+systemctl status openvpn@mullvad.service
+systemctl stop openvpn@mullvad.service
+systemctl enable openvpn@mullvad.service
+
 
 Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
 
