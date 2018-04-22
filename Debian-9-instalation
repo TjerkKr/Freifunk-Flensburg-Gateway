@@ -34,18 +34,20 @@ apt-get upgrade
  
 apt-get install screen htop iftop traceroute mtr-tiny mc openvpn bash-completion nano ca-certificates haveged ntp unbound isc-dhcp-server radvd iptables-persistent apt-transport-https bind9 sudo git apt-transport-https vnstat
 
+##Install linux-header package under Debian or Ubuntu Linux
+sudo apt-get install linux-headers-$(uname -r)
+Source: https://www.cyberciti.biz/faq/howto-install-kernel-headers-package/
+
 ## Debian 9 dirmngr error fix
 apt remove gnupg
 apt install --reinstall gnupg2
 apt install dirmngr
 
-# Install ifconfig Command
-    
+# Install ifconfig Command  
 apt-get install net-tools
 Source: https://linuxconfig.org/how-to-install-missing-ifconfig-command-on-debian-linux
 
 ## B.A.T.M.A.N and fastd
-
 add jessie-backports to your /etc/apt/sources.list, then
 
 echo "deb https://repo.universe-factory.net/debian/ sid main" >>/etc/apt/sources.list
