@@ -772,6 +772,17 @@ systemctl enable openvpn@mullvad.service
 
 Source http://weidner.in-bad-schmiedeberg.de/computer/linux/fedora/openvpn-mit-systemd/
 
+PID file /run/openvpn/mullvad.pid not readable (yet?) after start: No such file or directory
+
+edit /lib/systemd/system/openvpn@.service and add
+
+PIDFile=/var/run/openvpn/%i.pid
+
+systemctl start openvpn@mullvad.service
+systemctl status openvpn@mullvad.service
+
+Source: https://unix.stackexchange.com/questions/371924/openvpn-systemd-timeout-error-but-works
+
 
 Test the VPN Connection:
 
