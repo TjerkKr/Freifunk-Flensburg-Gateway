@@ -477,14 +477,7 @@ Edit the file /etc/bind/named.conf.options
        // Uncomment the following block, and insert the addresses replacing
        // the all-0's placeholder.
        forwarders {
-               10.4.0.1;
-               10.5.0.1;
-               10.6.0.1;
-               10.7.0.1;
-               10.8.0.1;
-               10.9.0.1;
-               10.30.0.1;
-               10.50.0.1;
+               10.4.0.1; // Fix Ipleak
        };
        //========================================================================
        // If BIND logs error messages about the root key being expired,
@@ -515,7 +508,11 @@ mkdir /root/bin
 /sbin/ip -6 route del default table 42
 /sbin/ip route add default dev tun0 table 42
 /sbin/ip -6 route add default dev tun0 table 42
-     
+
+/sbin/ip route add 10.4.0.1/32 dev tun0
+
+
+
 make the script executable
 
 chmod +x /root/bin/vpn.up
@@ -529,7 +526,11 @@ chmod +x /root/bin/vpn.up
 /sbin/ip -6 route del default table 42
 /sbin/ip route add default dev tun0 table 42
 /sbin/ip -6 route add default dev tun0 table 42
-      
+
+/sbin/ip route del 10.4.0.1/32
+
+
+
 make the script executable
 
 chmod +x /root/bin/vpn.down
