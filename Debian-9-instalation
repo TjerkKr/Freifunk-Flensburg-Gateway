@@ -499,6 +499,8 @@ Edit the file /etc/bind/named.conf.options
    
 ## Activate Locale DNS domain .fffl
 
+service bind9 stop
+
 cd /etc/bind/
 
 mkdir zones
@@ -528,6 +530,12 @@ zone "129.10.in-addr.arpa" {
 cd /etc/bind/zones
 
 git clone https://github.com/freifunk-flensburg/dns_fffl
+
+service bind9 start
+
+service bind9 status
+
+
 
 ## VPN
 
