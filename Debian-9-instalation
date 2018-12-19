@@ -476,6 +476,9 @@ Edit the file /etc/bind/named.conf.options
        // nameservers, you probably want to use them as forwarders.
        // Uncomment the following block, and insert the addresses replacing
        // the all-0's placeholder.
+       listen-on { 127.0.0.1; 10.129.0.0/16; };
+       listen-on-v6 { ::1; fddf:bf7:10:1::/64; };
+
        forwarders {
                10.4.0.1; // Fix Ipleak
        };
@@ -491,6 +494,7 @@ Edit the file /etc/bind/named.conf.options
       // allow-recursion { localnets; localhost; };
       auth-nxdomain no;    # conform to RFC1035
       listen-on-v6 { any; };
+      allow-query { any; };
    };
 
 ## VPN
