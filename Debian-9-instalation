@@ -496,6 +496,38 @@ Edit the file /etc/bind/named.conf.options
       listen-on-v6 { any; };
       allow-query { any; };
    };
+   
+## Activate Locale DNS domain .fffl
+
+cd /etc/bind/
+
+mkdir zones
+
+
+Edit the file nano /etc/bind9/named.conf.local
+
+
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "fffl" {
+        type master;
+        file "/etc/bind/zones/db.fffl";
+};
+
+zone "129.10.in-addr.arpa" {
+        type master;
+        file "/etc/bind/zones/10.129.zone";
+};
+
+cd /etc/bind/zones
+
+git clone https://github.com/freifunk-flensburg/dns_fffl
 
 ## VPN
 
