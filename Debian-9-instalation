@@ -99,35 +99,32 @@ apt remove gnupg
 apt install --reinstall gnupg2
 apt install dirmngr
 
-# Install ifconfig Command  
-apt-get install net-tools
-Source: https://linuxconfig.org/how-to-install-missing-ifconfig-command-on-debian-linux
-
-## B.A.T.M.A.N and fastd
-add jessie-backports to your /etc/apt/sources.list, then
-
-echo "deb https://repo.universe-factory.net/debian/ sid main" >>/etc/apt/sources.list
-gpg --keyserver pgpkeys.mit.edu --recv-key 16EF3F64CB201D9C
-gpg -a --export 16EF3F64CB201D9C | apt-key add -
-
 apt-get update
 apt-get install batctl fastd bridge-utils
 
 ## downgrade to batman 14
     
+git clone https://github.com/freifunk-gluon/batman-adv-legacy
+cd batman-adv-legacy 
+sudo make 
+sudo make install 
+cd ..
+wget http://downloads.open-mesh.org/batman/releases/batman-adv-2013.4.0/batctl-2013.4.0.tar.gz
+tar xzf batctl-2013.4.0.tar.gz 
+cd batctl-2013.4.0 
+make 
+sudo make install 
+
+sudo echo "batman-adv" >> /etc/modules
+
+batctl -v
+
+cd batman-adv-legacy 
+cp batman-adv.ko /lib/modules/4.1.19+/kernel/net/batman-adv/
+
 modinfo batman-adv
-apt-get install batman-adv-dkms
-dkms remove batman-adv/2013.4.0 --all
-dkms --force install batman-adv/2013.4.0
-modprobe batman-adv # (if the wrong version is loaded "rmmod batman-adv" and then repeat the dkms commands)
-dmesg or batctl -v or cat /sys/module/batman_adv/version # (check, to see, that you have the correct version loaded)
-    
-    
-## This is needed for any version
-add batman-adv to your /etc/modules to autoload it on boot and activate it:
-   
-echo "batman-adv" >> /etc/modules
-modprobe batman-adv
+
+Source: https://wiki.freifunk-franken.de/w/Raspberry_Pi_ins_B.A.T.M.A.N.
      
 ## Fastd
 create the directory for your fastd peers:
