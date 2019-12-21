@@ -498,11 +498,6 @@ Edit the file /etc/bind/named.conf.options
 
 service bind9 stop
 
-cd /etc/bind/
-
-mkdir zones
-
-
 Edit the file nano /etc/bind9/named.conf.local
 
 
@@ -524,13 +519,28 @@ zone "129.10.in-addr.arpa" {
         file "/etc/bind/zones/10.129.zone";
 };
 
+
+
+Fetch your Freemesh zones from github. For Example here with the fffl zones:
+
+mkdir -p /etc/bind/zones
 cd /etc/bind/zones
 
 git clone https://github.com/freifunk-flensburg/dns_fffl
 
+Edit the  dns_fffl  file and configur the freemesh subdomains.
+
+A = IPv4
+AAAA= IPV6
+
+
+
 service bind9 start
 
 service bind9 status
+
+
+
 
 
 
